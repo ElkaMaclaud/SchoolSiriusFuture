@@ -1,39 +1,129 @@
-.registration {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    align-items: center;
+.authorizationWrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.authorization {
+  width: 340px;
+  height: 535px;
+  display: flex;
+  gap: 14px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
+.authorization__header {
+  margin: 0;
+  padding: 0;
+  font-family: Circe Rounded;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 35px;
+  text-align: left;
+}
+.authorizationForm {
+  width: 100%;
+}
+.authorizationForm form {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 20px;
+  font-family: Circe Rounded;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16.2px;
+  text-align: left;
+  color: #79747f;
+  margin-bottom: 14px;
+}
 input {
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    outline: none;
-    padding: 10px;
-    background-color: #fff;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  outline: none;
+  padding: 10px;
+  background-color: #fff;
+}
+.inputWrapper {
+  position: relative;
+}
+.inputWrapper input {
+  width: 100%;
+}
+.hidePasswordSVG svg {
+  position: absolute;
+  right: 5%;
+  bottom: 30%;
+}
+input[type="checkbox"] {
+  width: fit-content;
+}
+label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+button {
+  margin: 0;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  width: 339px;
+  height: 48px;
+  padding: 10px 86px 10px 86px;
+  gap: 8px;
+  border-radius: 30px;
+  background-color: #8d7fc7;
+  opacity: 0px;
+  transition: 0.3s ease-in-out;
 }
 
-button {
-    width: 100%;
-    margin: 0;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    cursor: pointer;
-    outline: none;
-    background-color: #edf7fa;
-    transition: 0.2s ease-in-out;
-}
 button:hover {
-    background-color: #d6edee;
+  background-color: #7c6ebf;
 }
-button:disabled:hover {
-    background-color: #edf7fa;
-    cursor: default;
+
+.secondWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: Circe Rounded;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21.6px;
+  text-align: center;
+}
+.linksWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.authorizationFooter {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  bottom: 40px;
 }
 a {
-    text-align: center;
-    text-decoration: none;
+  color: #008aff;
+  text-decoration: none;
+}
+.lang {
+  font-family: Circe Rounded;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21.6px;
+  text-align: left;
+  color: #79747f;
+}
+.langActive {
+  font-family: Circe Rounded;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 21px;
+  text-align: left;
+  color: #7362bc;
 }

@@ -12,14 +12,14 @@ function App() {
     const { page, token } = useAppSelector((state) => state.page);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    useEffect(() => {
-        if (page === "LOGIN") {
-            navigate("/auth")
-        } else if (page === "LOADING") {
-            // dispatch(FETCH_ALL_DATA());
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [page, dispatch]);
+    // useEffect(() => {
+    //     if (page === "LOGIN") {
+    //         navigate("/auth")
+    //     } else if (page === "LOADING") {
+    //         // dispatch(FETCH_ALL_DATA());
+    //     }
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [page, dispatch]);
     interface Elements {
         [key: string]: ReactElement;
     }

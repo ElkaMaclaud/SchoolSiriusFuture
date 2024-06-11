@@ -12,13 +12,15 @@ export interface IInitialState {
     user: IAuthorization;
     page: "LOADING" | "COMPLICATED" | "LOGIN";
     language: "RU" | "EN"
+    role: "STUDENT" | "TRAINER"
 }
 const state: IInitialState = {
     success: false,
     token: localStorage.getItem("access_token"),
     user: { email: "", password: "" },
-    page: "LOADING",
-    language: "RU"
+    page: "LOGIN",
+    language: "RU",
+    role: "STUDENT"
 };
 export const REGISTR_USER = createAsyncThunk<
     { success: boolean; message: string },
@@ -152,7 +154,7 @@ const slice = createSlice({
                 token: action.payload.token,
                 message: "Success",
                 showModal: true,
-                page: "LOADING",
+                page: "LOGIN",
             };
         });
         builder.addCase(AUTH_USER.rejected, (state, action) => {
