@@ -1,0 +1,33 @@
+.wrapperPage {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 0 22px;
+}
+
+.pageLink {
+    margin-top: 30px;
+    align-self: start;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.pageLink * {
+    font-size: 20px;
+    cursor: pointer;
+    color: blue;
+}
+
+.pageLink svg {
+    transform: rotate(180deg);
+}
+
+.wrapperPage img {
+    max-width: 100%;
+    min-height: calc(100vh - 322px);
+    border-radius: 30%;
+    object-fit: fill;
+}
