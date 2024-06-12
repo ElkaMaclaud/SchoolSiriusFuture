@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import classes from "./style/LoginPage.module.css";
+import classes from "./style/Auth.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/reduxHooks";
 import { AUTH_USER } from "../../store/slice";
 import SiriusLabel from "../../UI_Component/SiriusLabel";
@@ -14,7 +14,7 @@ const actionCreators: ActionCreators = {
   AUTH_USER,
 };
 
-export const LoginPage = () => {
+const Auth = () => {
   const [hide, setHide] = useState<boolean>(true);
   const { success, user, language } = useAppSelector((state) => state.page);
   const dispatch = useAppDispatch();
@@ -98,3 +98,4 @@ export const LoginPage = () => {
     </div>
   );
 };
+export default Auth

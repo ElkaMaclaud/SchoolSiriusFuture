@@ -8,6 +8,7 @@
 .authorization {
   width: 340px;
   height: 535px;
+  font: Circe Rounded;
   display: flex;
   gap: 14px;
   flex-direction: column;
@@ -18,7 +19,6 @@
 .authorization__header {
   margin: 0;
   padding: 0;
-  font-family: Circe Rounded;
   font-size: 40px;
   font-weight: 400;
   line-height: 35px;
@@ -32,7 +32,6 @@
   flex-direction: column;
   justify-content: start;
   gap: 20px;
-  font-family: Circe Rounded;
   font-size: 12px;
   font-weight: 400;
   line-height: 16.2px;
@@ -51,9 +50,6 @@ input {
 .inputWrapper {
   position: relative;
 }
-.inputWrapper input {
-  width: 100%;
-}
 .hidePasswordSVG svg {
   position: absolute;
   right: 5%;
@@ -61,11 +57,13 @@ input {
 }
 input[type="checkbox"] {
   width: fit-content;
+  cursor: pointer;
 }
 label {
   display: flex;
   align-items: center;
   gap: 5px;
+  cursor: pointer;
 }
 button {
   margin: 0;
@@ -90,7 +88,6 @@ button:hover {
   width: 100%;
   display: flex;
   flex-direction: column;
-  font-family: Circe Rounded;
   font-size: 16px;
   font-weight: 400;
   line-height: 21.6px;
@@ -111,19 +108,17 @@ a {
   color: #008aff;
   text-decoration: none;
 }
-.lang {
-  font-family: Circe Rounded;
-  font-size: 16px;
+.authorizationFooter > * {
+  cursor: pointer;
   font-weight: 400;
+}
+.lang {
+  font-size: 16px;
   line-height: 21.6px;
-  text-align: left;
   color: #79747f;
 }
 .langActive {
-  font-family: Circe Rounded;
   font-size: 24px;
-  font-weight: 400;
   line-height: 21px;
-  text-align: left;
   color: #7362bc;
 }

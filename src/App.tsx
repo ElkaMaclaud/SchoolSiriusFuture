@@ -5,8 +5,8 @@ import MainPage from "./Pages/MainPage/MainPage";
 import PrivateRoute from "./HOC/PrivateRoute";
 import NotfoundPage from "./Pages/NotfoundPage/NotfoundPage";
 import LoadingPage from "./Pages/LoadingPage/LoadingPage";
-import { LoginPage } from "./Pages/LoginPage/LoginPage";
 import InaccessiblePage from "./Components/InaccessiblePage/InaccessiblePage";
+import Login from "./Pages/Login/Login";
 
 function App() {
     const { page, token } = useAppSelector((state) => state.page);
@@ -26,7 +26,7 @@ function App() {
     if (page === "COMPLICATED") {
         const routes: Elements = {
             listOfLesson: <MainPage />,
-
+            
         };
         return (
             <PrivateRoute>
@@ -55,7 +55,7 @@ function App() {
 
     return (
         <Routes>
-            <Route path={"/"} element={<LoginPage />} />
+            <Route path={"/"} element={<Login />} />
             <Route path="*" element={<InaccessiblePage />} />
         </Routes>
     );
