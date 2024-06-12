@@ -31,6 +31,7 @@ const ChapterList = () => {
       {chapterList.map((item) => {
         return (
           <div
+            key={item.name}
             className={
               chapter === item.name
                 ? classes.sidebarChapterActive

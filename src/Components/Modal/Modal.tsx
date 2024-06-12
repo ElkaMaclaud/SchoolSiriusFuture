@@ -8,14 +8,15 @@ import React, {
   } from "react";
   import ReactDOM from "react-dom";
   import classes from "./style/Modal.module.css";
+import Cross from "../../UI_Component/Icons/Cross";
   
   interface IModal {
-    title: string;
-    handleAction: () => void;
-    content: ReactNode;
+    title?: string;
+    handleAction?: () => void;
+    children: ReactNode;
   }
   
-  export  const Modal:FC<IModal> = ({ title, content, handleAction }) => {
+  export  const Modal:FC<IModal> = ({ title, children, handleAction }) => {
     const ref = useRef<HTMLDivElement>(null);
     const [active, setActive] = useState(true);
     const [open, setOpen] = useState(false);
@@ -30,14 +31,6 @@ import React, {
       }
     }, []);
     useEffect(() => {
-      if (active) {
-        document.body.style.overflowY = "hidden";
-      } 
-      return () => {
-        document.body.style.overflowY = "visible";
-      }
-    }, [active]);
-    useEffect(() => {
       setOpen(true);
       function handleClick(event: MouseEvent) {
         if (
@@ -45,7 +38,6 @@ import React, {
           !ref.current?.contains(event.target)
         ) {
           if (open) {
-            handleAction();
             setActive(false);
           }
         }
@@ -58,7 +50,6 @@ import React, {
     function onClick() {
       function handleClick(event: MouseEvent) {
         if (event.target instanceof Node && ref.current?.contains(event.target)) {
-          handleAction();
           setActive(false);
         }
       }
@@ -68,10 +59,9 @@ import React, {
       };
     }
     const closeModal = () => {
-      handleAction();
       setActive(false);
     };
-    const checkPropsType = (prop: ReactNode = content): prop is string => {
+    const checkPropsType = (prop: ReactNode = children): prop is string => {
       return typeof prop === "string";
     };
   
@@ -81,21 +71,21 @@ import React, {
         return (
           <>
             <span></span>
-            <p>{content}</p>
+            <p>{children}</p>
           </>
         );
       }
-      return <>{content}</>;
+      return <>{children}</>;
     };
     return ReactDOM.createPortal(
       <div
         style={{ top: `${modalTop}px` }}
         className={active ? classes.modal : classes.modalFalse}
         ref={ref}
-      >
-        <div className={classes.modalContent}>
-
-        </div>
+      > duhgfljl
+        <div className={classes.roundCross} onClick={closeModal}>
+        <Cross />
+      </div>
       </div>,
       node
     );

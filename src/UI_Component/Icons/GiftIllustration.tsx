@@ -11,24 +11,24 @@ const GiftIllustration = () => {
         <rect x="37.5332" y="18.2656" width="15.2368" height="13.4084" transform="rotate(12.5953 37.5332 18.2656)" fill="url(#paint4_linear_8365_562)"/>
         <defs>
         <linearGradient id="paint0_linear_8365_562" x1="55.9613" y1="11.5123" x2="41.473" y2="20.0012" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#FFD080"/>
-        <stop offset="1" stop-color="#FFA841"/>
+        <stop stopColor="#FFD080"/>
+        <stop offset="1" stopColor="#FFA841"/>
         </linearGradient>
         <linearGradient id="paint1_linear_8365_562" x1="44.8836" y1="27.1719" x2="44.8836" y2="87.6801" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#DC69DD"/>
-        <stop offset="1" stop-color="#FFBFE6"/>
+        <stop stopColor="#DC69DD"/>
+        <stop offset="1" stopColor="#FFBFE6"/>
         </linearGradient>
         <linearGradient id="paint2_linear_8365_562" x1="46.3598" y1="31.8496" x2="46.3598" y2="92.3579" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#FFA740"/>
-        <stop offset="1" stop-color="#FFF9C1"/>
+        <stop stopColor="#FFA740"/>
+        <stop offset="1" stopColor="#FFF9C1"/>
         </linearGradient>
         <linearGradient id="paint3_linear_8365_562" x1="45.7698" y1="20.1399" x2="42.8409" y2="33.2245" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#E071DF"/>
-        <stop offset="1" stop-color="#EE95E2"/>
+        <stop stopColor="#E071DF"/>
+        <stop offset="1" stopColor="#EE95E2"/>
         </linearGradient>
         <linearGradient id="paint4_linear_8365_562" x1="45.1516" y1="18.2656" x2="45.1516" y2="31.674" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#FFAA45"/>
-        <stop offset="1" stop-color="#FFD282"/>
+        <stop stopColor="#FFAA45"/>
+        <stop offset="1" stopColor="#FFD282"/>
         </linearGradient>
         </defs>
     </svg>

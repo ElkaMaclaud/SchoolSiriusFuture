@@ -13,9 +13,9 @@ const Path = ({ isActive }: {isActive?: boolean}) => {
       <path
         d="M1.039 6.91473H17C18.105 6.91473 19 7.80973 19 8.91473V17.9997C19 19.0997 18.1 19.9997 17 19.9997H3C1.895 19.9997 1 19.1047 1 17.9997V7.29074C1 6.45874 1.515 5.71373 2.294 5.41973L12.647 1.51074C13.301 1.26374 14 1.74673 14 2.44573V6.91373"
         stroke={fillColor}
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

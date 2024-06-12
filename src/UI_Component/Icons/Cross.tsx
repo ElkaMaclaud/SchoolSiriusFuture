@@ -1,6 +1,6 @@
 import React from "react";
 
-const Group = () => {
+const Cross = () => {
   return (
     <svg
       width="24"
@@ -10,9 +10,16 @@ const Group = () => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M8 10L12 14L16 10"
+        d="M8 8L16 16"
         stroke="#7362BC"
-        strokeWidth="1.2"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M16 8L8 16"
+        stroke="#7362BC"
+        strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -20,4 +27,4 @@ const Group = () => {
   );
 };
 
-export default Group;
+export default Cross;
