@@ -16,13 +16,15 @@
   align-items: center;
 }
 
-.authorization__header {
+.authorizationHeader {
   margin: 0;
   padding: 0;
   font-size: 40px;
   font-weight: 400;
   line-height: 35px;
-  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .authorizationForm {
   width: 100%;
@@ -35,7 +37,6 @@
   font-size: 12px;
   font-weight: 400;
   line-height: 16.2px;
-  text-align: left;
   color: #79747f;
   margin-bottom: 14px;
 }

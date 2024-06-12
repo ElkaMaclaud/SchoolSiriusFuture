@@ -12,7 +12,7 @@ const NotfoundPage = () => {
               <span>Вернуться назад</span>
           </div>
           <img
-              src="https://monovm.com/uploads/tinymce/Suno/2024/02/02/65bcebc3f342a-error-404-not-found.webp?1706879941049"
+              src="https://img.freepik.com/free-vector/oops-404-error-with-a-broken-robot-concept-illustration_114360-5529.jpg?size=338&ext=jpg&ga=GA1.1.1371518722.1717891200&semt=ais_user"
               alt=""
           />
       </div>

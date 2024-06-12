@@ -30,7 +30,7 @@ const Auth = () => {
     <div className={classes.authorizationWrapper}>
       <div className={classes.authorization}>
         <SiriusLabel />
-        <h2 className={classes.authorization__header}>Вход в Sirius Future</h2>
+        <h1 className={classes.authorizationHeader}>Вход в Sirius Future</h1>
         <div className={classes.authorizationForm}>
           <form onSubmit={handleClick}>
             <input
@@ -78,13 +78,13 @@ const Auth = () => {
             </button>
           </form>
           <div className={classes.linksWrapper}>
-            <Link to="">Я забыл пароль</Link>
-            <Link to="">Войти как тренер</Link>
+            <Link to="/registration">Я забыл пароль</Link>
+            <Link to="/registration">Войти как тренер</Link>
           </div>
         </div>
         <div className={classes.secondWrapper}>
           <span>Нет аккаунта?</span>
-          <Link to="">Зарегистрироваться</Link>
+          <Link to="/registration">Зарегистрироваться</Link>
         </div>
       </div>
       <div className={classes.authorizationFooter}>
