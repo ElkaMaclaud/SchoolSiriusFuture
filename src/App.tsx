@@ -7,6 +7,9 @@ import NotfoundPage from "./Pages/NotfoundPage/NotfoundPage";
 import LoadingPage from "./Pages/LoadingPage/LoadingPage";
 import Login from "./Pages/Login/Login";
 
+import Profile from "./Pages/Profile/Profile";
+import LessonСalendar from "./Pages/LessonСalendar/LessonСalendar";
+
 function App() {
     const { page, token } = useAppSelector((state) => state.page);
     const navigate = useNavigate();
@@ -24,14 +27,13 @@ function App() {
     }
     if (page === "COMPLICATED") {
         const routes: Elements = {
-            listOfLesson: <MainPage />,
-            
+            lessonСalendar: <LessonСalendar />,
+            profile: <Profile />
         };
         return (
             <PrivateRoute>
                 <Routes>
                     <Route path={"/"} element={<MainPage />}>
-                        <Route path="/" element={<NotfoundPage />} />
                         {Object.keys(routes).map((route) => {
                             return (
                                 <Route

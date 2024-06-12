@@ -1,0 +1,10 @@
+.modal {
+    box-shadow: 0px 0px 800px rgba(43, 37, 37, 0.5);
+    height: fit-content;
+    width: 600px;
+    position: absolute;
+    left: 40%;
+    background-color: hsl(0, 0%, 100%);
+    border-radius: 50px;
+    z-index: 1;
+  }

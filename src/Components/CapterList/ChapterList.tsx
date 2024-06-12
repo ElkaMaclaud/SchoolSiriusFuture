@@ -1,15 +1,15 @@
 // В идеале эти разделы должны приходить из бэка, но здесь я просто создаю моковые данные
 import React, { cloneElement, useState } from "react";
 import classes from "./style/ChapterList.module.css";
-import Home from "../../UI_Component/Home";
-import Calendar from "../../UI_Component/Calendar";
-import Path from "../../UI_Component/Path";
-import Achievements from "../../UI_Component/Achievements";
-import Library from "../../UI_Component/Library";
-import Puzzle from "../../UI_Component/Puzzle";
-import Headset from "../../UI_Component/Headset";
-import Settings from "../../UI_Component/Settings";
-import Questions from "../../UI_Component/Questions";
+import Home from "../../UI_Component/Icons/Home";
+import Calendar from "../../UI_Component/Icons/Calendar";
+import Path from "../../UI_Component/Icons/Path";
+import Achievements from "../../UI_Component/Icons/Achievements";
+import Library from "../../UI_Component/Icons/Library";
+import Puzzle from "../../UI_Component/Icons/Puzzle";
+import Headset from "../../UI_Component/Icons/Headset";
+import Settings from "../../UI_Component/Icons/Settings";
+import Questions from "../../UI_Component/Icons/Questions";
 import { IChapterList } from "../../Type/ChapterListType";
 
 const chapterList: IChapterList[] = [

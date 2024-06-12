@@ -2,10 +2,10 @@ import React, { FC, useState } from "react";
 import classes from "./style/Auth.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/reduxHooks";
 import { AUTH_USER } from "../../store/slice";
-import SiriusLabel from "../../UI_Component/SiriusLabel";
+import SiriusLabel from "../../UI_Component/Icons/SiriusLabel";
 import { Link } from "react-router-dom";
-import HidePassword from "../../UI_Component/HidePassword";
-import ShowPassword from "../../UI_Component/ShowPassword";
+import HidePassword from "../../UI_Component/Icons/HidePassword";
+import ShowPassword from "../../UI_Component/Icons/ShowPassword";
 
 interface ActionCreators {
   [key: string]: any;

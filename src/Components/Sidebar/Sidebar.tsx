@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import classes from "./style/Sidebar.module.css";
-import SiriusLabel from "../../UI_Component/SiriusLabel";
-import GiftIllustration from "../../UI_Component/GiftIllustration";
-import LogoText from "../../UI_Component/LogoText";
+import SiriusLabel from "../../UI_Component/Icons/SiriusLabel";
+import GiftIllustration from "../../UI_Component/Icons/GiftIllustration";
+import LogoText from "../../UI_Component/Icons/LogoText";
 import ChapterList from "../CapterList/ChapterList";
 
 

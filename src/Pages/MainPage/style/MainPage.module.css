@@ -1,4 +1,13 @@
 .wrapperPage {
+    margin: 50px auto;
     display: flex;
-    gap: 20px;
+    justify-content: center;
+}
+.contentWrapper {
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+.content {
+    padding: 30px;
 }
