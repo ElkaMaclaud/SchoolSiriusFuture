@@ -1,0 +1,36 @@
+.container, .containerAfter, .containerNotBefore {
+    position: absolute;
+    cursor: pointer;
+    box-shadow: 0px 0px 50px rgba(56, 49, 49, 0.5);
+    height: fit-content;
+    background-color: #fff;
+    border-radius: 20px;
+    top: 9.6vh;
+    padding: 1rem 0;
+  }
+  .container::before {
+    display: block;
+    content: "";
+    position: absolute;
+    height: 20px;
+    left: 42%;
+    border: 10px solid transparent;
+  }
+  .container::before {
+    top: -39px;
+    border-bottom: 15px solid #fff;
+  }
+  .containerAfter::after {
+    display: block;
+    content: "";
+    position: absolute;
+    height: 20px;
+    left: 42%;
+    border: 10px solid transparent;
+    transform: rotate(180deg);
+  }
+  .containerAfter::after {
+    bottom: -45px;
+    border-bottom: 15px solid #fff;
+  }
+  
