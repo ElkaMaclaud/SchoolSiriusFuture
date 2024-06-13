@@ -1,4 +1,4 @@
-import React, { CSSProperties, useRef, useState } from "react";
+import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import CalendarSlider from "../../Components/CalendarSlider/CalendarSlider";
 import classes from "./style/LessonsCalendar.module.css";
 import { useToggle } from "../../hooks/useToggle";
@@ -7,6 +7,8 @@ import { Dropdown } from "../../Components/DropDown/DropDown";
 import { OptionCard } from "../../UI_Component/OptionCard/OptionCard";
 import Button from "../../UI_Component/Button/Button";
 import { setStyle } from "../../utils/setStyleDropdown";
+import { useAppDispatch } from "../../store/reduxHooks";
+import { FETCH_LESSONS_NAME_AND_DATE } from "../../store/slice";
 
 export const optionsSort = [
   "Ментальная арифметика",
@@ -29,10 +31,16 @@ const LessonСalendar = () => {
   const refParent = useRef<HTMLDivElement>(null);
   const [showDropDown, toggleShowDropDown] = useToggle(false);
   const [selectSort, setSelectSort] = useState("");
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(FETCH_LESSONS_NAME_AND_DATE())
+  }, [])
 
   const handleChange = (select: string) => {
     setSelectSort(select);
     toggleShowDropDown();
+    
   };
   return (
     <div className={classes.lessonCalendarWrapper}>

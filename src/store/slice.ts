@@ -31,6 +31,7 @@ export interface IInitialState {
     language: "RU" | "EN";
     role: "STUDENT" | "TRAINER";
     lessons: ILesson[];
+    lessonCounts: ICountLessons,
 }
 const state: IInitialState = {
     success: false,
@@ -39,7 +40,8 @@ const state: IInitialState = {
     page: "LOGIN",
     language: "RU",
     role: "STUDENT",
-    lessons: []
+    lessons: [],
+    lessonCounts: {}
 };
 export const REGISTR_USER = createAsyncThunk<
     { success: boolean; message: string },
@@ -225,6 +227,13 @@ const slice = createSlice({
                 message: action.payload as string,
             };
         });
+        builder.addCase(AUTH_USER.pending, (state, action) => {
+            return {
+                ...state,
+                success: false,
+                page: "LOADING",
+            };
+        });
         builder.addCase(AUTH_USER.fulfilled, (state, action) => {
             localStorage.setItem("access_token", action.payload.token);
             return {
@@ -243,7 +252,31 @@ const slice = createSlice({
                 page: "LOGIN",
             };
         });
-        
+        builder.addCase(FETCH_UPCOMING_LESSONS.fulfilled, (state, action) => {
+            return {
+                ...state,
+                lessons: action.payload.data.lessons,
+                timeToNextLesson: action.payload.data.timeToNextLesson,
+                success: true,               
+                page: "COMPLICATED"
+            };
+        });
+        builder.addCase(FETCH_LESSONS_COUNTS.fulfilled, (state, action) => {
+            return {
+                ...state,
+                lessonCounts: {...action.payload.data},
+                success: true,               
+                page: "COMPLICATED"
+            };
+        });
+        builder.addCase(FETCH_LESSONS_NAME_AND_DATE.fulfilled, (state, action) => {
+            return {
+                ...state,
+                lessons: action.payload.data,
+                success: true,               
+                page: "COMPLICATED"
+            };
+        });
     },
 });
 
