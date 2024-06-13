@@ -2,25 +2,44 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "./Store";
 
 type IAuthorization = {
+    name: string;
     email: string;
     password: string;
 };
-
+export interface ICountLessons {
+    [key: string]: number;
+}
+export interface IData {
+    lessons: ILesson[];
+    timeToNextLesson: ITimeToNextLesson;
+}
+export interface ILesson {
+    lessonName: string;
+    date: string;
+    teacher: string;
+}
+export interface ITimeToNextLesson {
+    days: number;
+    hours: number;
+    minutes: number;
+}
 export interface IInitialState {
     success: boolean;
     token: string | null;
     user: IAuthorization;
     page: "LOADING" | "COMPLICATED" | "LOGIN";
-    language: "RU" | "EN"
-    role: "STUDENT" | "TRAINER"
+    language: "RU" | "EN";
+    role: "STUDENT" | "TRAINER";
+    lessons: ILesson[];
 }
 const state: IInitialState = {
     success: false,
     token: localStorage.getItem("access_token"),
-    user: { email: "", password: "" },
+    user: { email: "", password: "", name: "" },
     page: "COMPLICATED",
     language: "RU",
-    role: "STUDENT"
+    role: "STUDENT",
+    lessons: []
 };
 export const REGISTR_USER = createAsyncThunk<
     { success: boolean; message: string },
@@ -31,7 +50,7 @@ export const REGISTR_USER = createAsyncThunk<
 >("page/REGISTR_USER", async ({ email, password }, { rejectWithValue }) => {
     try {
         const response = await fetch(
-            "http://localhost:5000/auth/registration",
+            "https://scool-server.vercel.app/api/registration",
             {
                 method: "POST",
                 headers: {
@@ -62,7 +81,7 @@ export const AUTH_USER = createAsyncThunk<
 >("page/AUTH_USER", async ({ email, password }, { rejectWithValue }) => {
     try {
         const response = await fetch(
-            "http://localhost:5000/auth/login",
+            "https://scool-server.vercel.app/api/login",
             {
                 method: "POST",
                 headers: {
@@ -84,54 +103,90 @@ export const AUTH_USER = createAsyncThunk<
         return rejectWithValue(`${error}`);
     }
 });
-// export const FETCH_ALL_DATA = createAsyncThunk<
-//     { success: boolean; message: string; data: IData[] },
-//     undefined,
-//     { rejectValue: string; state: RootState }
-// >("page/FETCH_ALL_DATA", async (_, { rejectWithValue, getState }) => {
-//     try {
-//         const response = await fetch(
-//             "http://localhost:5000/auth/get_data",
-//             {
-//                 method: "GET",
-//                 headers: {
-//                     "Content-Type": "application/json",
-//                     Authorization: `Bearer ${getState().page.token}`,
-//                 },
-//             }
-//         );
-//         const data = await response.json();
-//         if (data.success) {
-//             return data;
-//         } else {
-//             throw new Error(data.message);
-//         }
-//     } catch (error) {
-//         return rejectWithValue(`${error}`);
-//     }
-// });
-export const FETCH_FILE = createAsyncThunk<
-    any,
+export const FETCH_LESSONS_NAME_AND_DATE = createAsyncThunk<
+  { success: boolean; message: string; data: ILesson[] },
+  { name: string; startDate: string; endDate: string },
+  { rejectValue: string; state: RootState }
+>("page/FETCH_LESSONS_NAME_AND_DATE", async (dto, { rejectWithValue, getState }) => {
+  const { name, startDate, endDate } = dto;
+
+  try {
+    const response = await fetch(
+      "https://scool-server.vercel.app/api/lessonsDate",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getState().page.token}`,
+        },
+        body: JSON.stringify({ name, startDate, endDate }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Ошибка при получении данных");
+    }
+
+    const data = await response.json();
+
+    if (data.success) {
+      return data;
+    } else {
+      throw new Error(data.message);
+    }
+  } catch (error) {
+    return rejectWithValue(`${error}`);
+  }
+});
+
+export const FETCH_UPCOMING_LESSONS = createAsyncThunk<
+    { success: boolean; message: string; data: IData },
     undefined,
     { rejectValue: string; state: RootState }
->("page/FETCH_FILE", async (_, { rejectWithValue, getState }) => {
+>("page/FETCH_UPCOMING_LESSONS", async (_, { rejectWithValue, getState }) => {
     try {
         const response = await fetch(
-            "http://localhost:5000/auth/download_resume",
+            "https://scool-server.vercel.app/api/upcomingLessons",
             {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${getState().page}`,
+                    Authorization: `Bearer ${getState().page.token}`,
                 },
             }
         );
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "ResumeJohn.doc";
-        a.click();
+        const data = await response.json();
+        if (data.success) {
+            return data;
+        } else {
+            throw new Error(data.message);
+        }
+    } catch (error) {
+        return rejectWithValue(`${error}`);
+    }
+});
+export const FETCH_LESSONS_COUNTS = createAsyncThunk<
+{ success: boolean; message: string; data: ICountLessons },
+    undefined,
+    { rejectValue: string; state: RootState }
+>("page/FETCH_LESSONS_COUNTS", async (_, { rejectWithValue, getState }) => {
+    try {
+        const response = await fetch(
+            "https://scool-server.vercel.app/api/lessonCounts",
+            {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${getState().page.token}`,
+                },
+            }
+        );
+        const data = await response.json();
+        if (data.success) {
+            return data;
+        } else {
+            throw new Error(data.message);
+        }
     } catch (error) {
         return rejectWithValue(`${error}`);
     }
@@ -166,17 +221,7 @@ const slice = createSlice({
                 page: "LOGIN",
             };
         });
-        // builder.addCase(FETCH_ALL_DATA.rejected, (state, action) => {
-        //     localStorage.setItem("access_token", "");
-        //     return {
-        //         ...state,
-        //         success: false,
-        //         showModal: true,
-        //         message: action.payload as string,
-        //         token: "",
-        //         page: "LOGIN",
-        //     };
-        // });
+        
     },
 });
 
