@@ -6,6 +6,7 @@ import Group from "../../UI_Component/Icons/Group";
 import { Dropdown } from "../../Components/DropDown/DropDown";
 import { OptionCard } from "../../UI_Component/OptionCard/OptionCard";
 import Button from "../../UI_Component/Button/Button";
+import { setStyle } from "../../utils/setStyleDropdown";
 
 export const optionsSort = [
   "Ментальная арифметика",
@@ -33,22 +34,6 @@ const LessonСalendar = () => {
     setSelectSort(select);
     toggleShowDropDown();
   };
-  const style: CSSProperties = {
-    ...getСoordinates(),
-    width: `${
-      refParent.current?.clientWidth && refParent.current?.clientWidth + 5
-    }px`,
-    overflow: "hidden",
-    padding: "0",
-    zIndex: "1",
-    boxShadow: "0px 0px 10px rgba(56, 49, 49, 0.1)",
-    borderRadius: "10px",
-  };
-  function getСoordinates(): CSSProperties {
-    const top = refParent.current?.offsetTop;
-    const left = refParent.current?.offsetLeft;
-    return { top: `${top && top + 45}px`, left: `${left}px` };
-  }
   return (
     <div className={classes.lessonCalendarWrapper}>
      <div>
@@ -76,7 +61,7 @@ const LessonСalendar = () => {
                 handleClick={handleChange}
               />
             }
-            style={style}
+            style={setStyle(refParent)}
             notPseudoElement
           />
         )}

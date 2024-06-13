@@ -1,12 +1,13 @@
-import React, { CSSProperties, useRef, useState } from "react";
+import React, { CSSProperties, useRef } from "react";
 import classes from "./style/Header.module.css";
 import Group from "../../UI_Component/Icons/Group";
 import MessageChat from "../../UI_Component/Icons/MessageChat";
 import { Dropdown } from "../DropDown/DropDown";
+import { useToggle } from "../../hooks/useToggle";
 
 
 const Header = () => {
-  const [showDropDown, setShowDropDown] = useState(false);
+  const [showDropDown, setShowDropDown] = useToggle(false);
   const parentRef = useRef<HTMLDivElement>(null);
   const ref = useRef<HTMLDivElement>(null);
   const setStyle = (width = 250): CSSProperties => {
@@ -15,7 +16,8 @@ const Header = () => {
       : null;
     return {
       width: `${width}px`,
-      left: `${(left || 100) - width / 2 - 50}px`,
+      left: `${(left || 100) - width / 2 - 150}px`,
+      top: "120px"
     };
   };
   return (
@@ -30,14 +32,14 @@ const Header = () => {
         </div>
         <div className={classes.headerAvatarUser}>
           <div className={classes.headerAvatar}></div>
-          <div onClick={() => setShowDropDown(!showDropDown)}>
+          <div onClick={setShowDropDown}>
             <Group />
           </div>
         </div>
       </div>
       {showDropDown && (
           <Dropdown ref={ref} style={setStyle()}>
-            fhdhgfhgfhgfhfd
+            <></>
           </Dropdown>
         )}
     </div>

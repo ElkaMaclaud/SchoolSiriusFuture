@@ -1,17 +1,28 @@
-import React, { useState } from "react";
+import React, {  useRef, useState } from "react";
 import { Arrow } from "../../UI_Component/Icons/Arrow";
 import classes from "./style/CalendarSlider.module.css";
 import CardSmall from "../../UI_Component/CardSmall/CardSmall";
 import Questions from "../../UI_Component/Icons/Questions";
+import { useToggle } from "../../hooks/useToggle";
+import { Dropdown } from "../DropDown/DropDown";
+import { setStyle } from "../../utils/setStyleDropdown";
 
 const CalendarSlider = () => {
   const currentDate = new Date().getDate();
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
+  const ref = useRef<HTMLDivElement>(null);
+  const refParent = useRef<HTMLDivElement>(null);
+  const [showDropDown, toggleShowDropDown] = useToggle(false);
 
   const getStyle = (date: number) => {
     if (date === currentDate) return { backgroundColor: "#EEEEFF" };
     return {};
+  };
+
+  const goToToday = () => {
+    setCurrentYear(new Date().getFullYear());
+    setCurrentMonth(new Date().getMonth() + 1);
   };
 
   const changeMonth = (increment: number) => {
@@ -115,7 +126,28 @@ const CalendarSlider = () => {
             <Arrow />
           </div>
         </div>
-        <div className={classes.wrapperCalendarButtonToday}><button></button><Questions /></div>
+        <div className={classes.wrapperCalendarButtonToday}>
+          <button onClick={goToToday}>Сегодня</button>
+          <div onClick={toggleShowDropDown}><Questions color={"#7362BC"} /></div>
+          {showDropDown && (
+            <Dropdown
+              ref={ref}
+              style={{...setStyle(refParent), top: "250px"}}
+              children={
+                <div style={{padding: "20px"}}>
+                  <h3>Частые вопросы</h3>
+                  <ul>
+                    Список вопросов: 
+                    <li>Как научиться быстро читать</li>
+                    <li>Как научиться быстро считать</li>
+                    <li>Как научиться программировать</li>
+                  </ul>
+                </div>
+              }
+              notPseudoElement
+            />
+          )}
+        </div>
       </div>
       <table className={classes.wrapperCalendarTable}>
         <thead>

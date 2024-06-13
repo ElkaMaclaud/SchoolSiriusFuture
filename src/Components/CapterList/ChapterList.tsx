@@ -22,7 +22,7 @@ const chapterList: IChapterList[] = [
   { component: <Library />, name: "Библиотека", path: "/library" },
   { component: <Headset />, name: "Проверка связи", path: "/headset" },
   { component: <Settings />, name: "Настройки", path: "/settings" },
-  { component: <Questions />, name: "Воопросы", path: "/questions" },
+  { component: <Questions />, name: "Вопросы", path: "/questions" },
 ];
 
 const ChapterList = () => {
