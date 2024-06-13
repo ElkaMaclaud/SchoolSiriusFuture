@@ -3,11 +3,9 @@ import classes from "./style/Header.module.css";
 import Group from "../../UI_Component/Icons/Group";
 import MessageChat from "../../UI_Component/Icons/MessageChat";
 import { Dropdown } from "../DropDown/DropDown";
-import { useAppSelector } from "../../store/reduxHooks";
 
 
 const Header = () => {
-  const { token } = useAppSelector((state) => state.page);
   const [showDropDown, setShowDropDown] = useState(false);
   const parentRef = useRef<HTMLDivElement>(null);
   const ref = useRef<HTMLDivElement>(null);

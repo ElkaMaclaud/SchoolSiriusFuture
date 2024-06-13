@@ -1,14 +1,68 @@
-import React from "react";
+import React, { FC } from "react";
 
-const Arrow = () => {
+export const Arrow: FC<{ left?: boolean }> = ({ left }) => {
+  if (left) {
+    return (
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M5 12L19 12"
+          stroke="#79747F"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M10 7L5 12"
+          stroke="#79747F"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M10 17L5 12"
+          stroke="#79747F"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    );
+  }
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
-        fill="currentColor"
-        d="M12.293 5.293a1 1 0 0 0 0 1.414L16.586 11H4a1 1 0 1 0 0 2h12.586l-4.293 4.293a1 1 0 0 0 1.414 1.414l6-6a1 1 0 0 0 0-1.414l-6-6a1 1 0 0 0-1.414 0Z"
-      ></path>
+        d="M19 12L5 12"
+        stroke="#79747F"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M14 17L19 12"
+        stroke="#79747F"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M14 7L19 12"
+        stroke="#79747F"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 };
-
-export default Arrow;

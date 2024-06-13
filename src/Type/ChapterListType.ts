@@ -1,4 +1,5 @@
 export interface IChapterList {
     component: JSX.Element;
-    name: string
+    name: string;
+    path: string
 }

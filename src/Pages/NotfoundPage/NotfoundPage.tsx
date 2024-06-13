@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./style/NotfoundPage.module.css";
 import { useNavigate } from "react-router-dom";
-import Arrow from "../../UI_Component/Icons/Arrow";
+import { Arrow } from "../../UI_Component/Icons/Arrow";
 
 const NotfoundPage = () => {
   const navigate = useNavigate();

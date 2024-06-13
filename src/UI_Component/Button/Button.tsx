@@ -1,8 +1,8 @@
-import React, { FC, ReactNode } from 'react'
+import React, { CSSProperties, FC, ReactNode } from 'react'
 
-const Button:FC<{children: ReactNode}> = ({children}) => {
+const Button:FC<{children: ReactNode, style?: CSSProperties}> = ({children, style}) => {
   return (
-    <button>
+    <button style={style}>
         {children}
     </button>
   )

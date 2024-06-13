@@ -11,21 +11,23 @@ import Headset from "../../UI_Component/Icons/Headset";
 import Settings from "../../UI_Component/Icons/Settings";
 import Questions from "../../UI_Component/Icons/Questions";
 import { IChapterList } from "../../Type/ChapterListType";
+import { useNavigate } from "react-router-dom";
 
 const chapterList: IChapterList[] = [
-  { component: <Home isActive={false} />, name: "Главная" },
-  { component: <Calendar isActive={false} />, name: "Расписание" },
-  { component: <Path isActive={false} />, name: "Оплата" },
-  { component: <Achievements isActive={false} />, name: "Достижения" },
-  { component: <Puzzle isActive={false} />, name: "Тренажеры" },
-  { component: <Library isActive={false} />, name: "Библиотека" },
-  { component: <Headset isActive={false} />, name: "Проверка связи" },
-  { component: <Settings isActive={false} />, name: "Настройки" },
-  { component: <Questions isActive={false} />, name: "Воопросы" },
+  { component: <Home />, name: "Главная", path: "/profile" },
+  { component: <Calendar />, name: "Расписание", path: "/lessonСalendar" },
+  { component: <Path />, name: "Оплата", path: "/pay" },
+  { component: <Achievements />, name: "Достижения", path: "/achievements" },
+  { component: <Puzzle />, name: "Тренажеры", path: "/puzzle" },
+  { component: <Library />, name: "Библиотека", path: "/library" },
+  { component: <Headset />, name: "Проверка связи", path: "/headset" },
+  { component: <Settings />, name: "Настройки", path: "/settings" },
+  { component: <Questions />, name: "Воопросы", path: "/questions" },
 ];
 
 const ChapterList = () => {
   const [chapter, setChapter] = useState(chapterList[0].name);
+  const navigate = useNavigate()
   return (
     <div className={classes.sidebarChapterList}>
       {chapterList.map((item) => {
@@ -39,9 +41,9 @@ const ChapterList = () => {
             }
           >
             {cloneElement(item.component, {
-              isActive: chapter === item.name,
+              color: chapter === item.name ? "#fff" : "#434B74",
             })}
-            <p onClick={() => setChapter(item.name)}>{item.name}</p>
+            <p onClick={() => {setChapter(item.name); navigate(item.path)}}>{item.name}</p>
           </div>
         );
       })}
