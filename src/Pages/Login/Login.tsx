@@ -4,7 +4,7 @@ import Auth from '../../Components/Auth/Auth'
 const Login = () => {
   return (
    <Fragment>
-    <Auth/>
+    <Auth action={"AUTH_USER"} />
    </Fragment>
   )
 }

@@ -1,9 +1,9 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import classes from "./style/Auth.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/reduxHooks";
-import { AUTH_USER } from "../../store/slice";
+import { AUTH_USER, REGISTR_USER, SET_USER_DATA } from "../../store/slice";
 import SiriusLabel from "../../UI_Component/Icons/SiriusLabel";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import HidePassword from "../../UI_Component/Icons/HidePassword";
 import ShowPassword from "../../UI_Component/Icons/ShowPassword";
 
@@ -11,12 +11,14 @@ interface ActionCreators {
   [key: string]: any;
 }
 const actionCreators: ActionCreators = {
+  REGISTR_USER,
   AUTH_USER,
 };
 
-const Auth = () => {
+const Auth: FC<{ action: string }> = ({ action }) => {
   const [hide, setHide] = useState<boolean>(true);
-  const { success, user, language } = useAppSelector((state) => state.page);
+  const { user, language, success } = useAppSelector((state) => state.page);
+  const navigate = useNavigate()
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({
     email: user.email,
@@ -24,7 +26,20 @@ const Auth = () => {
   });
   const handleClick = (event: any) => {
     event.preventDefault();
+    const actionFunction = actionCreators[action];
+    if (actionFunction) {
+      const actionFunction = actionCreators[action];
+      dispatch(actionFunction({ ...formData }));
+      dispatch(SET_USER_DATA({ ...formData }));
+    }
   };
+
+  useEffect(() => {
+    if (success) {
+      navigate("/auth");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [success]);
 
   return (
     <div className={classes.authorizationWrapper}>
@@ -32,7 +47,7 @@ const Auth = () => {
         <SiriusLabel />
         <h1 className={classes.authorizationHeader}>Вход в Sirius Future</h1>
         <div className={classes.authorizationForm}>
-          <form onSubmit={handleClick}>
+          <form onSubmit={handleClick} autoComplete="on">
             <input
               value={formData.email}
               onChange={(event) =>
@@ -78,13 +93,17 @@ const Auth = () => {
             </button>
           </form>
           <div className={classes.linksWrapper}>
-            <Link to="/registration">Я забыл пароль</Link>
-            <Link to="/registration">Войти как тренер</Link>
+            <Link to="/">Я забыл пароль</Link>
+            <Link to="/">Войти как тренер</Link>
           </div>
         </div>
         <div className={classes.secondWrapper}>
           <span>Нет аккаунта?</span>
-          <Link to="/registration">Зарегистрироваться</Link>
+          {action === "REGISTR_USER" ? (
+            <Link to="/auth">Уже есть аккаунт</Link>
+          ) : (
+            <Link to="/registration">Зарегистрироваться</Link>
+          )}
         </div>
       </div>
       <div className={classes.authorizationFooter}>
@@ -98,4 +117,4 @@ const Auth = () => {
     </div>
   );
 };
-export default Auth
+export default Auth;

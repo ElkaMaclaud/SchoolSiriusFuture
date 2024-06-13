@@ -4,7 +4,7 @@ import Auth from "../../Components/Auth/Auth";
 const Registration = () => {
   return (
     <Fragment>
-      <Auth />
+      <Auth action={"REGISTR_USER"} />
     </Fragment>
   );
 };

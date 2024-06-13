@@ -10,7 +10,7 @@ const PrivateRoute: FC<{ children: ReactNode }> = ({
 
     useEffect(() => {
         if (page === "COMPLICATED") {
-            navigate("/lessonСalendar", {replace: true});
+            navigate("/profile", {replace: true});
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

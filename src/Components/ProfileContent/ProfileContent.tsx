@@ -4,11 +4,15 @@ import { useNavigate } from "react-router-dom";
 import Cross from "../../UI_Component/Icons/Cross";
 import classes from "./style/ProfileContent.module.css";
 import Exit from "../../UI_Component/Icons/Exit";
+import { useAppDispatch } from "../../store/reduxHooks";
+import { SET_PAGE } from "../../store/slice";
 const users = [1, 2];
 const ProfileContent: FC<{ handleClick: () => void }> = ({ handleClick }) => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch()
   const handleNavigate = () => {
-    navigate("/");
+    dispatch(SET_PAGE("LOGIN"))
+    navigate("/auth");
   };
   return (
     <div className={classes.profileWrapper}>

@@ -36,7 +36,7 @@ const state: IInitialState = {
     success: false,
     token: localStorage.getItem("access_token"),
     user: { email: "", password: "", name: "" },
-    page: "COMPLICATED",
+    page: "LOGIN",
     language: "RU",
     role: "STUDENT",
     lessons: []
@@ -196,11 +196,35 @@ const slice = createSlice({
     name: "Page",
     initialState: state,
     reducers: {
+        SET_PAGE: (state, action) => {
+            state.page = action.payload;
+        },
         SET_LANGUAGE: (state, action) => {
             state.language = action.payload;
         },
+        SET_USER_DATA: (state, action) => {
+            state.user = {
+                email: action.payload.email,
+                password: action.payload.password,
+                name: action.payload.email.split("@")[0]
+            };
+        },
     },
     extraReducers: (builder) => {
+        builder.addCase(REGISTR_USER.fulfilled, (state, action) => {
+            return {
+                ...state,
+                success: true,
+                message: action.payload.message,
+            };
+        });
+        builder.addCase(REGISTR_USER.rejected, (state, action) => {
+            return {
+                ...state,
+                success: false,
+                message: action.payload as string,
+            };
+        });
         builder.addCase(AUTH_USER.fulfilled, (state, action) => {
             localStorage.setItem("access_token", action.payload.token);
             return {
@@ -208,8 +232,7 @@ const slice = createSlice({
                 success: true,
                 token: action.payload.token,
                 message: "Success",
-                showModal: true,
-                page: "LOGIN",
+                page: "COMPLICATED",
             };
         });
         builder.addCase(AUTH_USER.rejected, (state, action) => {
@@ -217,7 +240,6 @@ const slice = createSlice({
                 ...state,
                 success: false,
                 message: action.payload as string,
-                showModal: true,
                 page: "LOGIN",
             };
         });
@@ -225,5 +247,5 @@ const slice = createSlice({
     },
 });
 
-export const { SET_LANGUAGE } = slice.actions;
+export const { SET_LANGUAGE, SET_PAGE, SET_USER_DATA } = slice.actions;
 export default slice.reducer;

@@ -1,27 +1,26 @@
 import React, { ReactElement, useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "./store/reduxHooks";
+import { useAppSelector } from "./store/reduxHooks";
 import MainPage from "./Pages/MainPage/MainPage";
 import PrivateRoute from "./HOC/PrivateRoute";
 import NotfoundPage from "./Pages/NotfoundPage/NotfoundPage";
 import LoadingPage from "./Pages/LoadingPage/LoadingPage";
 import Login from "./Pages/Login/Login";
-
 import Profile from "./Pages/Profile/Profile";
 import LessonСalendar from "./Pages/LessonСalendar/LessonСalendar";
+import Registration from "./Pages/Registration/Registration";
+import InaccessiblePage from "./Components/InaccessiblePage/InaccessiblePage";
+import AuthPage from "./Pages/AuthPage/AuthPage";
 
 function App() {
-    const { page, token } = useAppSelector((state) => state.page);
+    const { page } = useAppSelector((state) => state.page);
     const navigate = useNavigate();
-    const dispatch = useAppDispatch();
     useEffect(() => {
         if (page === "LOGIN") {
             navigate("/auth")
-        } else if (page === "LOADING") {
-            // dispatch(FETCH_ALL_DATA());
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [page, dispatch]);
+    }, []);
     interface Elements {
         [key: string]: ReactElement;
     }
@@ -56,8 +55,19 @@ function App() {
 
     return (
         <Routes>
-            <Route path={"/"} element={<Login />} />
-            <Route path="*" element={<NotfoundPage />} />
+            <Route path={"/"} element={<AuthPage />}>
+                <Route
+                    key={Math.random().toString(36)}
+                    path={"/auth"}
+                    element={<Login />}
+                />
+                <Route
+                    key={Math.random().toString(36)}
+                    path={"/registration"}
+                    element={<Registration />}
+                />
+                <Route path="*" element={<InaccessiblePage />} />
+            </Route>
         </Routes>
     );
 }
