@@ -1,0 +1,43 @@
+.profileWrapper {
+    font: Circe Rounded;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21.6px;
+    color: #323854;
+}
+.profileWrapperContent {
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.profileUserCard {
+    width: 190px;
+    height: 48px;
+    padding: 8px;
+    border-radius: 12px; 
+    display: flex;
+    align-items: center; 
+}
+.profileUserCard:hover {
+    background-color: #EEEEFF;
+}
+
+.profileWrapperClose {
+    text-align: right;
+}
+.profileWrapperBorder {
+    padding-top: 10px;
+    border-bottom: 1px solid #EEEEFF;
+}
+
+.profileWrapperLink {
+    color: #008AFF;
+}
+.svg {
+    fill: #7362BC;
+}
+.profileExit {
+    display: flex;
+    justify-content: space-between;
+}
