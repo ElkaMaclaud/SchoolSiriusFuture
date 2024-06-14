@@ -1,4 +1,4 @@
-import React, { CSSProperties, useEffect, useRef, useState } from "react";
+import React, { CSSProperties, useRef, useState } from "react";
 import CalendarSlider from "../../Components/CalendarSlider/CalendarSlider";
 import classes from "./style/LessonsCalendar.module.css";
 import { useToggle } from "../../hooks/useToggle";
@@ -7,8 +7,6 @@ import { Dropdown } from "../../Components/DropDown/DropDown";
 import { OptionCard } from "../../UI_Component/OptionCard/OptionCard";
 import Button from "../../UI_Component/Button/Button";
 import { setStyle } from "../../utils/setStyleDropdown";
-import { useAppDispatch } from "../../store/reduxHooks";
-import { FETCH_LESSONS_NAME_AND_DATE } from "../../store/slice";
 
 export const optionsSort = [
   "Ментальная арифметика",
@@ -30,15 +28,10 @@ const LessonСalendar = () => {
   const ref = useRef<HTMLDivElement>(null);
   const refParent = useRef<HTMLDivElement>(null);
   const [showDropDown, toggleShowDropDown] = useToggle(false);
-  const [selectSort, setSelectSort] = useState("");
-  const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    dispatch(FETCH_LESSONS_NAME_AND_DATE())
-  }, [])
-
+  const [select, setSelect] = useState("");
+  
   const handleChange = (select: string) => {
-    setSelectSort(select);
+    setSelect(select);
     toggleShowDropDown();
     
   };
@@ -51,7 +44,7 @@ const LessonСalendar = () => {
           ref={refParent}
           onClick={toggleShowDropDown}
         >
-          <input readOnly={true} value={selectSort} placeholder="Выбрать предмет"/>
+          <input readOnly={true} value={select} placeholder="Выбрать предмет"/>
           <div className={showDropDown ? classes.optionACtive : classes.option}>
             <Group />
           </div>
@@ -64,7 +57,7 @@ const LessonСalendar = () => {
             ref={ref}
             children={
               <OptionCard
-                value={selectSort}
+                value={select}
                 list={optionsSort}
                 handleClick={handleChange}
               />
@@ -76,7 +69,7 @@ const LessonСalendar = () => {
       </div>
      </div>
       <div>
-        <CalendarSlider />
+        <CalendarSlider select={select}/>
       </div>
     </div>
   );

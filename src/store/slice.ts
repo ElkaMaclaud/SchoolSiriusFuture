@@ -32,6 +32,7 @@ export interface IInitialState {
     role: "STUDENT" | "TRAINER";
     lessons: ILesson[];
     lessonCounts: ICountLessons,
+    loading: boolean,
 }
 const state: IInitialState = {
     success: false,
@@ -41,7 +42,8 @@ const state: IInitialState = {
     language: "RU",
     role: "STUDENT",
     lessons: [],
-    lessonCounts: {}
+    lessonCounts: {},
+    loading: false
 };
 export const REGISTR_USER = createAsyncThunk<
     { success: boolean; message: string },
@@ -111,7 +113,6 @@ export const FETCH_LESSONS_NAME_AND_DATE = createAsyncThunk<
   { rejectValue: string; state: RootState }
 >("page/FETCH_LESSONS_NAME_AND_DATE", async (dto, { rejectWithValue, getState }) => {
   const { name, startDate, endDate } = dto;
-
   try {
     const response = await fetch(
       "https://scool-server.vercel.app/api/lessonsDate",
@@ -201,6 +202,9 @@ const slice = createSlice({
         SET_PAGE: (state, action) => {
             state.page = action.payload;
         },
+        SET_LOADING: (state, action) => {
+            state.loading = action.payload;
+        },
         SET_LANGUAGE: (state, action) => {
             state.language = action.payload;
         },
@@ -261,10 +265,10 @@ const slice = createSlice({
                 page: "COMPLICATED"
             };
         });
-        builder.addCase(FETCH_LESSONS_COUNTS.fulfilled, (state, action) => {
+        builder.addCase(FETCH_LESSONS_COUNTS.pending, (state, action) => {
             return {
                 ...state,
-                lessonCounts: {...action.payload.data},
+                loading: true,
                 success: true,               
                 page: "COMPLICATED"
             };
@@ -272,6 +276,7 @@ const slice = createSlice({
         builder.addCase(FETCH_LESSONS_NAME_AND_DATE.fulfilled, (state, action) => {
             return {
                 ...state,
+                loading: false,
                 lessons: action.payload.data,
                 success: true,               
                 page: "COMPLICATED"
@@ -280,5 +285,5 @@ const slice = createSlice({
     },
 });
 
-export const { SET_LANGUAGE, SET_PAGE, SET_USER_DATA } = slice.actions;
+export const { SET_LANGUAGE, SET_LOADING, SET_PAGE, SET_USER_DATA } = slice.actions;
 export default slice.reducer;

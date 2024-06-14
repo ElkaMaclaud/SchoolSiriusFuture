@@ -76,5 +76,19 @@
     color: #323854;
     padding: 5px;
     vertical-align: top;
+    width: 153.14px;
+    height: 101px;
 }
-/* #C8C5CD */
+.otherMonth {
+    color: #C8C5CD;
+}
+.wrapperCard {
+    width: 145px;
+    height: 34px;
+    padding: 4px;
+    border: .5px; 
+    border-radius: 2px;
+    background-color: #D7F0D6;
+    margin-top: 2px;
+    text-align: left;
+}
