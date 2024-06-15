@@ -1,4 +1,5 @@
 import React, { CSSProperties, FC, ReactNode } from "react";
+import classes from "./style/Button.module.css"
 
 const Button: FC<{
   children: ReactNode;
@@ -6,7 +7,7 @@ const Button: FC<{
   handleChange?: () => {};
 }> = ({ children, style, handleChange }) => {
   return (
-    <button style={style} onClick={handleChange}>
+    <button style={style} onClick={handleChange} className={classes.button}>
       {children}
     </button>
   );
