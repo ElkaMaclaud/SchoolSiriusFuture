@@ -36,7 +36,8 @@ export interface IInitialState {
   listLessons: ICountLessons;
   loading: boolean;
   timeToNextLesson: ITimeToNextLesson;
-  users: IAuthorization[]
+  users: IAuthorization[],
+  meetTheUser: boolean,
 }
 const state: IInitialState = {
   success: false,
@@ -49,7 +50,8 @@ const state: IInitialState = {
   listLessons: {},
   loading: false,
   timeToNextLesson: { days: 0, hours: 0, minutes: 0 },
-  users: []
+  users: [],
+  meetTheUser: true
 };
 export const REGISTR_USER = createAsyncThunk<
   { success: boolean; message: string },
@@ -239,6 +241,9 @@ const slice = createSlice({
     SET_LOADING: (state, action) => {
       state.loading = action.payload;
     },
+    SET_MEET_THE_USER: (state, action) => {
+      state.meetTheUser = action.payload;
+    },
     SET_LANGUAGE: (state, action) => {
       state.language = action.payload;
     },
@@ -329,6 +334,6 @@ const slice = createSlice({
   },
 });
 
-export const { SET_LANGUAGE, SET_LOADING, SET_PAGE, SET_USER_DATA } =
+export const { SET_LANGUAGE, SET_LOADING,  SET_MEET_THE_USER, SET_PAGE, SET_USER_DATA } =
   slice.actions;
 export default slice.reducer;

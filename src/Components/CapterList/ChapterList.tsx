@@ -12,6 +12,8 @@ import Questions from "../../UI_Component/Icons/Questions";
 import { IChapterList } from "../../Type/ChapterListType";
 import { useNavigate } from "react-router-dom";
 import Pay from "../../UI_Component/Icons/Pay";
+import { useAppDispatch } from "../../store/reduxHooks";
+import { SET_MEET_THE_USER } from "../../store/slice";
 
 const chapterList: IChapterList[] = [
   { component: <Home />, name: "Главная", path: "/profile" },
@@ -27,15 +29,21 @@ const chapterList: IChapterList[] = [
 
 const ChapterList = () => {
   const [chapter, setChapter] = useState(chapterList[0].name);
+  const dispatch = useAppDispatch()
   const navigate = useNavigate();
+  const handleClick = (item: IChapterList) => {
+    dispatch(SET_MEET_THE_USER(false))
+    setChapter(item.name);
+    navigate(item.path);
+  }
+  
   return (
     <div className={classes.sidebarChapterList}>
       {chapterList.map((item) => {
         return (
           <div
             onClick={() => {
-              setChapter(item.name);
-              navigate(item.path);
+              handleClick(item)
             }}
             key={item.name}
             className={
