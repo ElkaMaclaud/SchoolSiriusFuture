@@ -6,9 +6,12 @@ import { Dropdown } from "../DropDown/DropDown";
 import { useToggle } from "../../hooks/useToggle";
 import Avatar from "../Avatar/Avatar";
 import ProfileContent from "../ProfileContent/ProfileContent";
+import { useAppSelector } from "../../store/reduxHooks";
 
 
 const Header = () => {
+  const { user} = useAppSelector(state=> state.page)
+  console.log("////////////////", user)
   const [showDropDown, setShowDropDown] = useToggle(false);
   const parentRef = useRef<HTMLDivElement>(null);
   const ref = useRef<HTMLDivElement>(null);

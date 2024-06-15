@@ -1,6 +1,6 @@
 .wrapperCalendar {
-    font: Circe Rounded;
-    width: 1072px;
+    font: "Circe Rounded";
+    max-width: 1072px;
 }
 .wrapperCalendarInfo {
     display: flex;

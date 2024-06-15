@@ -1,0 +1,80 @@
+.wrapper {
+    font: "Circe Rounded";
+    width: 100%;
+    height: 372px;
+    gap: 16px;
+    border: 1px;
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #323854;
+    padding: 28px;
+}
+h2 {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 24px;
+    height: 24px;
+}
+ul {
+    padding: 0;
+    margin: 0;
+}
+.lesson {
+    width: 100%;
+    min-height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+.lesson:not(:last-child) {
+    border-bottom: 1px solid #EEEEFF;
+}
+.lessonName {
+    width: 30%;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21.6px;
+}
+.lessonDate {
+    width: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.lessonDateDay {
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 32px;
+}
+.lessonDateMonth {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16.2px;
+}
+.lessonButtons {
+    display: flex;
+    gap: 4px;
+}
+.lessonPeriodDate {
+    width: 12%;
+    display: flex;
+    justify-content:flex-end;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16.2px;    
+}
+.lessonTeacherAvatar {
+    width: 1%;
+}
+.lessonTeacher {
+    width: 18%;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 12px;
+}

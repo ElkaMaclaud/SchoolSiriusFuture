@@ -1,7 +1,7 @@
 .sidebar {
   width: 236px;
   height: 704px;
-  font: Circe Rounded;
+  font: "Circe Rounded";
   border-radius: 30px;
   background-color: #eeeeff;
   display: flex;

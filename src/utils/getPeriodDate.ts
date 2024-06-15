@@ -9,7 +9,7 @@ export const createCalendar = (
 ): string[] => {
   const startDate = new Date(currentYear, currentMonth, firstDate);
   const endDate = new Date(currentYear, currentMonth, firstDate + 6);
-  
+
   if (firstDate < 1) {
     startDate.setMonth(currentMonth - 1, firstDate);
   } else if (firstDate > daysInMonth) {
@@ -17,7 +17,19 @@ export const createCalendar = (
   }
 
   return [
-    `${getPeriodDate(startDate.getFullYear(), startDate.getMonth() + 1, startDate.getDate())}`,
-    `${getPeriodDate(endDate.getFullYear(), endDate.getMonth() + 1, endDate.getDate())}`
+    `${getPeriodDate(
+      startDate.getFullYear(),
+      startDate.getMonth() + 1,
+      startDate.getDate()
+    )}`,
+    `${getPeriodDate(
+      endDate.getFullYear(),
+      endDate.getMonth() + 1,
+      endDate.getDate()
+    )}`,
   ];
 };
+
+
+
+

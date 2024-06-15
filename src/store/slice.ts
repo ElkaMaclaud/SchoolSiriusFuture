@@ -7,7 +7,7 @@ type IAuthorization = {
   password: string;
 };
 export interface ICountLessons {
-  [key: string]: number
+  [key: string]: number;
 }
 export interface IData {
   lessons: ILesson[];
@@ -35,7 +35,8 @@ export interface IInitialState {
   lessons: ILesson[];
   listLessons: ICountLessons;
   loading: boolean;
-  timeToNextLesson?: ITimeToNextLesson;
+  timeToNextLesson: ITimeToNextLesson;
+  users: IAuthorization[]
 }
 const state: IInitialState = {
   success: false,
@@ -47,6 +48,8 @@ const state: IInitialState = {
   lessons: [],
   listLessons: {},
   loading: false,
+  timeToNextLesson: { days: 0, hours: 0, minutes: 0 },
+  users: []
 };
 export const REGISTR_USER = createAsyncThunk<
   { success: boolean; message: string },
@@ -161,7 +164,8 @@ export const FETCH_UPCOMING_LESSONS = createAsyncThunk<
         },
       }
     );
-    const data = await response.json();
+   
+    const data = await response.json(); 
     if (data.success) {
       return data;
     } else {
@@ -187,6 +191,33 @@ export const FETCH_LESSONS_COUNTS = createAsyncThunk<
         },
       }
     );
+    const data = await response.json();
+    if (data.success) {
+      return data;
+    } else {
+      throw new Error(data.message);
+    }
+  } catch (error) {
+    return rejectWithValue(`${error}`);
+  }
+});
+export const FETCH_USERS = createAsyncThunk<
+  { success: boolean; message: string; data: IAuthorization[] },
+  undefined,
+  { rejectValue: string; state: RootState }
+>("page/FETCH_USERS", async (_, { rejectWithValue, getState }) => {
+  try {
+    const response = await fetch(
+      "https://scool-server.vercel.app/api/getUsers",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getState().page.token}`,
+        },
+      }
+    );
+
     const data = await response.json();
     if (data.success) {
       return data;
@@ -265,13 +296,13 @@ const slice = createSlice({
         lessons: action.payload.data.lessons,
         timeToNextLesson: action.payload.data.timeToNextLesson,
         success: true,
+        loading: false,
         page: "COMPLICATED",
       };
     });
     builder.addCase(FETCH_LESSONS_COUNTS.fulfilled, (state, action) => {
       return {
         ...state,
-        loading: true,
         success: true,
         listLessons: action.payload.data,
         page: "COMPLICATED",
@@ -282,6 +313,14 @@ const slice = createSlice({
         ...state,
         loading: false,
         lessons: action.payload.data,
+        success: true,
+        page: "COMPLICATED",
+      };
+    });
+    builder.addCase(FETCH_USERS.fulfilled, (state, action) => {
+      return {
+        ...state,
+        users: action.payload.data,
         success: true,
         page: "COMPLICATED",
       };

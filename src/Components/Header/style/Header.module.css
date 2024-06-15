@@ -1,11 +1,11 @@
 .header {
     padding: 0 41px;
-    width: 1154px;
+    max-width: 1154px;
     height: 68px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font: Circe Rounded;
+    font: "Circe Rounded";
     font-size: 24px;
     font-weight: 400;
     line-height: 24px;

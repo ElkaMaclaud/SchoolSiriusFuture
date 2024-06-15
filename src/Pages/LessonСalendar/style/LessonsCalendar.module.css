@@ -1,8 +1,9 @@
 .lessonCalendarWrapper {
+    min-width: 100%;
     display: flex;
     flex-direction: column;
-    font: Circe Rounded;
-    gap: 30px;
+    font: "Circe Rounded";
+    gap: 15px;
 }
 .lessonCalendarSelect {
     display: flex;

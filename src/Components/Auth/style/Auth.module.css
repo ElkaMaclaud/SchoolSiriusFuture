@@ -8,7 +8,7 @@
 .authorization {
   width: 340px;
   height: 535px;
-  font: Circe Rounded;
+  font: "Circe Rounded";
   display: flex;
   gap: 14px;
   flex-direction: column;

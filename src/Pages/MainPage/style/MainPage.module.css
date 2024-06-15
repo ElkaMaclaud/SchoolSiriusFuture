@@ -9,9 +9,10 @@
     margin-top: 45px;
 }
 .contentWrapper {
+    max-width: calc(1440px - 128px);
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
     position: relative;
 }
 .content {

@@ -14,6 +14,7 @@ import {
 } from "../../store/slice";
 import Spinner from "../Spinner/Spinner";
 import CellContent from "../CellContent/CellContent";
+import { getDurationLesson } from "../../utils/getDurationLesson";
 
 interface ISelectProps {
   select: string;
@@ -100,16 +101,9 @@ const CalendarSlider: FC<ISelectProps> = ({ select, changeSchedule }) => {
               cursor: changeSchedule ? "pointer" : "auto",
             };
           };
-
           const lessonDate = new Date(lesson.date);
-          lessonDate.setTime(lessonDate.getTime() + 45 * 60000);
-          const formattedTime = lessonDate.toLocaleTimeString([], {
-            timeZone: "UTC",
-            hour: "2-digit",
-            minute: "2-digit",
-          });
-
-          return (
+          const formattedTime = getDurationLesson(lesson.date)
+           return (
             <CellContent
               key={lesson.date}
               changeSchedule={changeSchedule}
@@ -220,7 +214,7 @@ const CalendarSlider: FC<ISelectProps> = ({ select, changeSchedule }) => {
               ref={ref}
               style={{ ...setStyle(refParent), top: "250px" }}
               children={
-                <div style={{ padding: "20px" }}>
+                <div style={{ padding: "40px" }}>
                   <h3>Частые вопросы</h3>
                   <ul>
                     Список вопросов:

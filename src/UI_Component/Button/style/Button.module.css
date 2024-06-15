@@ -5,4 +5,5 @@ button {
     opacity: 0px;
     background-color: #DECFFF;
     color: #323854;
+    cursor: pointer;
 }
