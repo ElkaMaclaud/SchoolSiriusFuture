@@ -3,7 +3,6 @@ import React, { cloneElement, useState } from "react";
 import classes from "./style/ChapterList.module.css";
 import Home from "../../UI_Component/Icons/Home";
 import Calendar from "../../UI_Component/Icons/Calendar";
-import Path from "../../UI_Component/Icons/Path";
 import Achievements from "../../UI_Component/Icons/Achievements";
 import Library from "../../UI_Component/Icons/Library";
 import Puzzle from "../../UI_Component/Icons/Puzzle";
@@ -12,11 +11,12 @@ import Settings from "../../UI_Component/Icons/Settings";
 import Questions from "../../UI_Component/Icons/Questions";
 import { IChapterList } from "../../Type/ChapterListType";
 import { useNavigate } from "react-router-dom";
+import Pay from "../../UI_Component/Icons/Pay";
 
 const chapterList: IChapterList[] = [
   { component: <Home />, name: "Главная", path: "/profile" },
   { component: <Calendar />, name: "Расписание", path: "/lessonСalendar" },
-  { component: <Path />, name: "Оплата", path: "/pay" },
+  { component: <Pay/>, name: "Оплата", path: "/pay" },
   { component: <Achievements />, name: "Достижения", path: "/achievements" },
   { component: <Puzzle />, name: "Тренажеры", path: "/puzzle" },
   { component: <Library />, name: "Библиотека", path: "/library" },

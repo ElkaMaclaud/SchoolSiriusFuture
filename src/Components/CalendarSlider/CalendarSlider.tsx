@@ -1,10 +1,4 @@
-import React, {
-  FC,
-  Fragment,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { FC, Fragment, useEffect, useRef, useState } from "react";
 import { Arrow } from "../../UI_Component/Icons/Arrow";
 import classes from "./style/CalendarSlider.module.css";
 import Questions from "../../UI_Component/Icons/Questions";
@@ -19,16 +13,17 @@ import {
   SET_LOADING,
 } from "../../store/slice";
 import Spinner from "../Spinner/Spinner";
+import CellContent from "../CellContent/CellContent";
 
 interface ISelectProps {
   select: string;
+  changeSchedule: boolean;
 }
 
-const CalendarSlider: FC<ISelectProps> = ({ select }) => {
+const CalendarSlider: FC<ISelectProps> = ({ select, changeSchedule }) => {
   const { lessons, loading } = useAppSelector((state) => state.page);
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
-  const [changeSchedule, setChangeSchedule] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const refParent = useRef<HTMLDivElement>(null);
   const [showDropDown, toggleShowDropDown] = useToggle(false);
@@ -77,26 +72,34 @@ const CalendarSlider: FC<ISelectProps> = ({ select }) => {
 
     return { firstDate, daysInMonth };
   };
-
-  const CellContent: FC<{
+  const CellContentList: FC<{
     lessonsForDate: ILesson[];
   }> = ({ lessonsForDate }) => {
     return (
       <Fragment>
-        {lessonsForDate.map((lesson, index) => {
+        {lessonsForDate.map((lesson) => {
           const getStyle = () => {
-            if (new Date(lessonDate).getMonth() === currentMonth - 2)
+            const lessonDate = new Date(lesson.date);
+            if (lessonDate.getMonth() === currentMonth - 2) {
               return {
                 backgroundColor: "transparent",
-                border: ".5px solid #79747F",
+                border: `${!lesson.wasAbsent ? "1px solid #79747F" : "1px solid #22782B"}`,
+                cursor: changeSchedule ? "pointer" : "auto",
               };
-            else if (
-              new Date(lessonDate).getMonth() === currentMonth - 1 &&
-              new Date(lessonDate).getDate() === 1
-            )
-              return { backgroundColor: "#EEEEFF" };
-            return {};
+            } else if (
+              lessonDate.getMonth() === currentMonth - 1 &&
+              lessonDate.getDate() === 1
+            ) {
+              return {
+                backgroundColor: "#EEEEFF",
+                cursor: changeSchedule ? "pointer" : "auto",
+              };
+            }
+            return {
+              cursor: changeSchedule ? "pointer" : "auto",
+            };
           };
+
           const lessonDate = new Date(lesson.date);
           lessonDate.setTime(lessonDate.getTime() + 45 * 60000);
           const formattedTime = lessonDate.toLocaleTimeString([], {
@@ -104,11 +107,16 @@ const CalendarSlider: FC<ISelectProps> = ({ select }) => {
             hour: "2-digit",
             minute: "2-digit",
           });
+
           return (
-            <div className={classes.wrapperCard} key={index} style={getStyle()}>
-              <div>{`${lesson.date.slice(11, 16)} - ${formattedTime}`}</div>
-              <div>{lesson.lessonName}</div>
-            </div>
+            <CellContent
+              key={lesson.date}
+              changeSchedule={changeSchedule}
+              lesson={lesson}
+              style={getStyle()}
+              parentValue={`${lesson.date.slice(11, 16)} - ${formattedTime}\n${lesson.lessonName}`}
+              formattedTime={`${lesson.date.slice(11, 16)} - ${formattedTime}`}
+            />
           );
         })}
       </Fragment>
@@ -138,7 +146,7 @@ const CalendarSlider: FC<ISelectProps> = ({ select }) => {
 
         let cellContent = null;
         if (lessonsForDate.length > 0) {
-          cellContent = <CellContent lessonsForDate={lessonsForDate} />;
+          cellContent = <CellContentList lessonsForDate={lessonsForDate} />;
         }
 
         if (date < 1) {
@@ -186,9 +194,6 @@ const CalendarSlider: FC<ISelectProps> = ({ select }) => {
   const capitalizedMonth =
     monthName.charAt(0).toUpperCase() + monthName.slice(1);
 
-  if (loading) {
-    return <Spinner />;
-  }
   return (
     <div className={classes.wrapperCalendar}>
       <div className={classes.wrapperCalendarInfo}>
@@ -240,6 +245,7 @@ const CalendarSlider: FC<ISelectProps> = ({ select }) => {
             <th>Вс</th>
           </tr>
         </thead>
+        {loading && <Spinner />}
         <tbody>{createCalendarRender()}</tbody>
       </table>
     </div>

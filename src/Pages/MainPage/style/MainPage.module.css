@@ -2,6 +2,7 @@
     margin: 50px auto;
     display: flex;
     justify-content: center;
+    position: relative;
 }
 .wrapperSidebar {
     margin-top: 30px;

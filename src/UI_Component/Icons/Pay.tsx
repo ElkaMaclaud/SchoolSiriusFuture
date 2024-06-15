@@ -1,6 +1,6 @@
 import React from "react";
 
-const Path = ({ color  }: {color?: string}) => {
+const Pay = ({ color  }: {color?: string}) => {
   return (
     <svg
       width="24"
@@ -20,4 +20,4 @@ const Path = ({ color  }: {color?: string}) => {
   );
 };
 
-export default Path;
+export default Pay;

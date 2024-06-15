@@ -40,3 +40,14 @@
     margin-top: 4px;
     transition: .3s ease-in;
   }
+  button {
+    height: 40px;
+    gap: 8px;
+    border-radius: 30px;
+    opacity: 0px;
+    width: 344px;
+    padding: 10px 40px 10px 40px;
+    border-radius: 30px;
+    background-color: #DECFFF;
+    color: #323854;
+}

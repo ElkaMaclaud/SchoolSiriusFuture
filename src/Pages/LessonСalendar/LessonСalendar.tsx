@@ -1,11 +1,10 @@
-import React, { CSSProperties, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import CalendarSlider from "../../Components/CalendarSlider/CalendarSlider";
 import classes from "./style/LessonsCalendar.module.css";
 import { useToggle } from "../../hooks/useToggle";
 import Group from "../../UI_Component/Icons/Group";
 import { Dropdown } from "../../Components/DropDown/DropDown";
 import { OptionCard } from "../../UI_Component/OptionCard/OptionCard";
-import Button from "../../UI_Component/Button/Button";
 import { setStyle } from "../../utils/setStyleDropdown";
 
 export const optionsSort = [
@@ -14,21 +13,12 @@ export const optionsSort = [
   "Скорочтение",
 ];
 
-const buttonStyle: CSSProperties = {
-  width: "344px",
-  height: "40px",
-  padding: "10px 40px 10px 40px",
-  gap: "8px",
-  borderRadius: "30px",
-  backgroundColor: "#DECFFF",
-  color: "#323854"
-}
-
 const LessonСalendar = () => {
   const ref = useRef<HTMLDivElement>(null);
   const refParent = useRef<HTMLDivElement>(null);
   const [showDropDown, toggleShowDropDown] = useToggle(false);
   const [select, setSelect] = useState("");
+  const [changeSchedule, setChangeSchedule] = useState(false);
   
   const handleChange = (select: string) => {
     setSelect(select);
@@ -50,7 +40,7 @@ const LessonСalendar = () => {
           </div>
         </div>
         <div>
-          <Button style={buttonStyle}>Изменить расписание</Button>
+          <button onClick={() => setChangeSchedule(!changeSchedule)}>Изменить расписание</button>
         </div>
         {showDropDown && (
           <Dropdown
@@ -69,7 +59,7 @@ const LessonСalendar = () => {
       </div>
      </div>
       <div>
-        <CalendarSlider select={select}/>
+        <CalendarSlider select={select} changeSchedule={changeSchedule}/>
       </div>
     </div>
   );

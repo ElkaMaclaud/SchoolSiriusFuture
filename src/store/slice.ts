@@ -17,6 +17,8 @@ export interface ILesson {
     lessonName: string;
     date: string;
     teacher: string;
+    paid: boolean;
+    wasAbsent: boolean
 }
 export interface ITimeToNextLesson {
     days: number;
