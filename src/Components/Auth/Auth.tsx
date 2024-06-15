@@ -50,6 +50,13 @@ const Auth: FC<{ action: string }> = ({ action }) => {
     dispatch(SET_LANGUAGE(value));
   };
 
+  const buttonTitle = action === "REGISTR_USER"
+    ? language === "EN"
+      ? "Register"
+      : "Зарегистрироваться"
+    : language === "RU"
+    ? "Войти"
+    : "Sign in"
   return (
     <div className={classes.authorizationWrapper}>
       <div className={classes.authorization}>
@@ -102,15 +109,7 @@ const Auth: FC<{ action: string }> = ({ action }) => {
               className={classes.authorizationButton}
               disabled={!formData.email || !formData.password}
             >
-              <div>
-                {action === "REGISTR_USER"
-                  ? language === "EN"
-                    ? "Register"
-                    : "Зарегистрироваться"
-                  : language === "RU"
-                  ? "Войти"
-                  : "Sign in"}
-              </div>
+              {buttonTitle}
             </button>
           </form>
           <div className={classes.linksWrapper}>
