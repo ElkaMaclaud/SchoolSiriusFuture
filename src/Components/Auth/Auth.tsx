@@ -1,7 +1,12 @@
 import React, { FC, useEffect, useState } from "react";
 import classes from "./style/Auth.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/reduxHooks";
-import { AUTH_USER, REGISTR_USER, SET_LANGUAGE, SET_USER_DATA } from "../../store/slice";
+import {
+  AUTH_USER,
+  REGISTR_USER,
+  SET_LANGUAGE,
+  SET_USER_DATA,
+} from "../../store/slice";
 import SiriusLabel from "../../UI_Component/Icons/SiriusLabel";
 import { Link, useNavigate } from "react-router-dom";
 import HidePassword from "../../UI_Component/Icons/HidePassword";
@@ -18,7 +23,7 @@ const actionCreators: ActionCreators = {
 const Auth: FC<{ action: string }> = ({ action }) => {
   const [hide, setHide] = useState<boolean>(true);
   const { user, language, success } = useAppSelector((state) => state.page);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({
     email: user.email,
@@ -42,14 +47,18 @@ const Auth: FC<{ action: string }> = ({ action }) => {
   }, [success]);
 
   const changeLanguage = (value: string) => {
-    dispatch(SET_LANGUAGE(value))
-  }
+    dispatch(SET_LANGUAGE(value));
+  };
 
   return (
     <div className={classes.authorizationWrapper}>
       <div className={classes.authorization}>
         <SiriusLabel />
-        <h1 className={classes.authorizationHeader}>{language === "RU" ? "Вход в Sirius Future" : "Login to Sirius Future"}</h1>
+        <h1 className={classes.authorizationHeader}>
+          {language === "RU"
+            ? "Вход в Sirius Future"
+            : "Login to Sirius Future"}
+        </h1>
         <div className={classes.authorizationForm}>
           <form onSubmit={handleClick} autoComplete="on">
             <input
@@ -93,30 +102,54 @@ const Auth: FC<{ action: string }> = ({ action }) => {
               className={classes.authorizationButton}
               disabled={!formData.email || !formData.password}
             >
-              {action === "REGISTR_USER" ? (language === "EN" ? "Register" : "Зарегистрироваться") : 
-              (language === "RU" ? "Войти" : "Sign in")}
-
+              <div>
+                {action === "REGISTR_USER"
+                  ? language === "EN"
+                    ? "Register"
+                    : "Зарегистрироваться"
+                  : language === "RU"
+                  ? "Войти"
+                  : "Sign in"}
+              </div>
             </button>
           </form>
           <div className={classes.linksWrapper}>
-            <Link to="/auth">{ language === "RU" ? "Я забыл пароль" : "I forgot password"}</Link>
-            <Link to="/auth">{ language === "RU" ? "Войти как тренер" : "Login as a coach"}</Link>
+            <Link to="/auth">
+              {language === "RU" ? "Я забыл пароль" : "I forgot password"}
+            </Link>
+            <Link to="/auth">
+              {language === "RU" ? "Войти как тренер" : "Login as a coach"}
+            </Link>
           </div>
         </div>
         <div className={classes.secondWrapper}>
-          <span>{language === "RU" ? "Нет аккаунта?" : "Don't have an account?"}</span>
+          <span>
+            {language === "RU" ? "Нет аккаунта?" : "Don't have an account?"}
+          </span>
           {action === "REGISTR_USER" ? (
-            <Link to="/auth">{language === "RU" ? "Уже есть аккаунт" : "Already have an account"}</Link>
+            <Link to="/auth">
+              {language === "RU"
+                ? "Уже есть аккаунт"
+                : "Already have an account"}
+            </Link>
           ) : (
-            <Link to="/registration">{language === "RU" ? "Зарегистрироваться" : "Register"}</Link>
+            <Link to="/registration">
+              {language === "RU" ? "Зарегистрироваться" : "Register"}
+            </Link>
           )}
         </div>
       </div>
       <div className={classes.authorizationFooter}>
-        <span className={language === "RU" ? classes.langActive : classes.lang} onClick={() => changeLanguage("RU")}>
+        <span
+          className={language === "RU" ? classes.langActive : classes.lang}
+          onClick={() => changeLanguage("RU")}
+        >
           RU
         </span>
-        <span className={language === "EN" ? classes.langActive : classes.lang} onClick={() => changeLanguage("EN")}>
+        <span
+          className={language === "EN" ? classes.langActive : classes.lang}
+          onClick={() => changeLanguage("EN")}
+        >
           EN
         </span>
       </div>
