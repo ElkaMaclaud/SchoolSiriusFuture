@@ -77,7 +77,7 @@ label {
   font-weight: 400;
   line-height: 16.2px;
 }
-button {
+.authorizationButton {
   margin: 0;
   color: #fff;
   cursor: pointer;
@@ -92,7 +92,7 @@ button {
   transition: 0.3s ease-in-out;
 }
 
-button:hover {
+.authorizationButton:hover {
   background-color: #7c6ebf;
 }
 
