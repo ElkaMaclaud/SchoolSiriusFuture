@@ -5,14 +5,13 @@ import Cross from "../../UI_Component/Icons/Cross";
 import classes from "./style/ProfileContent.module.css";
 import Exit from "../../UI_Component/Icons/Exit";
 import { useAppDispatch, useAppSelector } from "../../store/reduxHooks";
-import { FETCH_USERS, SET_LOADING, SET_PAGE } from "../../store/slice";
+import { FETCH_USERS,  SET_PAGE } from "../../store/slice";
 
 const ProfileContent: FC<{ handleClick: () => void }> = ({ handleClick }) => {
   const { users, user } = useAppSelector((state) => state.page);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(SET_LOADING(true));
     dispatch(FETCH_USERS());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

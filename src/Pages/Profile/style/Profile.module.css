@@ -1,6 +1,15 @@
 .wrapper {
-    min-width: 100%;
+    max-width: 100%;
+    width: 1072px;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 20px;
+    overflow: hidden;
+}
+.contentCards {
+    display: flex;
+    gap: 20px;
+}
+.spinnerWrapper {
+    height: 100%;
 }

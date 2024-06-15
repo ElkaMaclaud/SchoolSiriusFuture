@@ -1,6 +1,7 @@
 .wrapperCalendar {
+    max-width: 100%;
     font: "Circe Rounded";
-    max-width: 1072px;
+    width: 1072px;
 }
 .wrapperCalendarInfo {
     display: flex;
@@ -83,4 +84,7 @@
 }
 .otherMonth {
     color: #C8C5CD;
+}
+.spinnerWrapper {
+    height: 100%;
 }

@@ -43,7 +43,7 @@ const state: IInitialState = {
   success: false,
   token: localStorage.getItem("access_token"),
   user: { email: "", password: "", name: "" },
-  page: "LOGIN",
+  page: "COMPLICATED",
   language: "RU",
   role: "STUDENT",
   lessons: [],
@@ -325,7 +325,6 @@ const slice = createSlice({
     builder.addCase(FETCH_USERS.fulfilled, (state, action) => {
       return {
         ...state,
-        loading: false,
         users: action.payload.data,
         success: true,
         page: "COMPLICATED",

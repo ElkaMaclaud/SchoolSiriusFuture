@@ -23,64 +23,69 @@ const Profile = () => {
     dispatch(SET_LOADING(true));
     dispatch(FETCH_LESSONS_COUNTS());
     dispatch(FETCH_UPCOMING_LESSONS());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className={classes.wrapper}>
-      <div>
-        <CardClass
-          style={{
-            width: "526px",
-            height: "248px",
-            backgroundColor: "#7362BC",
-            border: "none",
-          }}
-        >
-          <AdvertisingCard />
-        </CardClass>
+      <div className={classes.contentCards}>
+        <div>
+          <CardClass
+            style={{
+              width: "526px",
+              height: "248px",
+              backgroundColor: "#7362BC",
+              border: "none",
+            }}
+          >
+            <AdvertisingCard />
+          </CardClass>
+        </div>
+        <div>
+          <CardClass
+            style={{
+              width: "344px",
+              height: "248px",
+              backgroundColor: "#FFF1CB",
+              border: "none",
+            }}
+          >
+            <TimeToNextLesson nextLesson={timeToNextLesson} />
+          </CardClass>
+        </div>
+        <div>
+          <CardClass
+            style={{
+              width: "162px",
+              height: "248px",
+              backgroundColor: "#E8CBFF",
+              border: "none",
+            }}
+          >
+            <div style={{ padding: "28px" }}>
+              <SiriusLabel />
+            </div>
+          </CardClass>
+        </div>
       </div>
-      <div>
-        <CardClass
-          style={{
-            width: "344px",
-            height: "248px",
-            backgroundColor: "#FFF1CB",
-            border: "none",
-          }}
-        >
-          <TimeToNextLesson nextLesson={timeToNextLesson} />
-        </CardClass>
+      <div className={classes.contentCards}>
+        <div>
+          <CardClass style={{ width: "344px", height: "372px" }}>
+            <BalanceOfActivities listLessons={listLessons} />
+          </CardClass>
+        </div>
+        <div>
+          <CardClass
+            style={{
+              width: "708px",
+              height: "372px",
+            }}
+          >
+            <UpcomingLessons lessons={lessons} />
+          </CardClass>
+        </div>
+        {loading && <Spinner />}
       </div>
-      <div>
-        <CardClass
-          style={{
-            width: "162px",
-            height: "248px",
-            backgroundColor: "#E8CBFF",
-            border: "none",
-          }}
-        >
-          <div style={{padding: "28px"}}><SiriusLabel /></div>
-        </CardClass>
-      </div>
-
-      <div>
-        <CardClass style={{ width: "344px", height: "372px" }}>
-          <BalanceOfActivities listLessons={listLessons} />
-        </CardClass>
-      </div>
-      <div>
-        <CardClass
-          style={{
-            width: "708px",
-            height: "372px",
-          }}
-        >
-          <UpcomingLessons lessons={lessons} />
-        </CardClass>
-      </div>
-      {loading && <Spinner />}
     </div>
   );
 };

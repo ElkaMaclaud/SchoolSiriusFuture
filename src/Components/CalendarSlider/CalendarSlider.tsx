@@ -241,7 +241,7 @@ const CalendarSlider: FC<ISelectProps> = ({ select, changeSchedule }) => {
             <th>Вс</th>
           </tr>
         </thead>
-        {loading && <Spinner />}
+        {loading && <div className={classes.spinnerWrapper}><Spinner /></div>}
         <tbody>{createCalendarRender()}</tbody>
       </table>
     </div>
