@@ -90,7 +90,6 @@ const Auth: FC<{ action: string }> = ({ action }) => {
             </label>
             <button
               type="submit"
-              className={classes.Authorization__btn}
               disabled={!formData.email || !formData.password}
             >
               {action === "REGISTR_USER" ? (language === "EN" ? "Register" : "Зарегистрироваться") : 
