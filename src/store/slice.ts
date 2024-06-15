@@ -43,7 +43,7 @@ const state: IInitialState = {
   success: false,
   token: localStorage.getItem("access_token"),
   user: { email: "", password: "", name: "" },
-  page: "COMPLICATED",
+  page: "LOGIN",
   language: "RU",
   role: "STUDENT",
   lessons: [],
