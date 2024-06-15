@@ -43,7 +43,7 @@ const ChapterList = () => {
             {cloneElement(item.component, {
               color: chapter === item.name ? "#fff" : "#434B74",
             })}
-            <p onClick={() => {setChapter(item.name); navigate(item.path)}}>{item.name}</p>
+            <div onClick={() => {setChapter(item.name); navigate(item.path)}}>{item.name}</div>
           </div>
         );
       })}

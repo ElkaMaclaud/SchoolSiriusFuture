@@ -38,6 +38,7 @@
   background-color: #FDFDFF;
   overflow: hidden;
   color: #323854;
+  position: relative;
 }
 
 .sidebarFooterHeader {
@@ -63,9 +64,9 @@
   background-color: #D8ECFF;
   color: #323854;
 }
-.sidebarFooterGiftBox {
-  top: 50%;
-  right: -6%;
-  width: 81.54px;
-  height: 98.71px;
+
+.sidebarFooterGiftBox svg {
+  position: absolute;
+  bottom: 0px;
+  right: 0;
 }

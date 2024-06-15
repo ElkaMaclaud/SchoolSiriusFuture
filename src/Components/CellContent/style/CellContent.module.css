@@ -14,10 +14,33 @@
     color: #323854;
 }
 .cardInput {
-    outline: none;
     background-color: transparent;
     border: 1px solid #E12828;
     cursor: pointer;
+    width: 145px;
+    height: 34px;
+    padding: 2px;
+    position: relative;
+}
+.cardInput input {
+    outline: none;
+    border: none;
+    font-size: 12px;
+    padding: 0;
+}
+.cardInput svg {
+    position: absolute;
+    top: 2px;
+    left: 128px;
+    width: 12px;
+    height: 12.37px;
+    border: 1px;
+    cursor: pointer;
+}
+.cardInput input:last-child {
+    font-size: 10px;
+    margin-top: -3px;
+    padding: 0;
 }
 .cardLessonDatePay {
     display: flex;
@@ -28,9 +51,8 @@
     height: 12.37px;
     top: 1.63px;
     left: 2px;
-    gap: 0px;
-    border: 1px 0px 0px 0px;
-    opacity: 0px;
+    border: 1px;
+    cursor: pointer;
 }
 .cardLessonName {
     font-size: 10px;

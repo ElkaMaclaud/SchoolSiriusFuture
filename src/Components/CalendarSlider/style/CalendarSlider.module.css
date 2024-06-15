@@ -1,5 +1,6 @@
 .wrapperCalendar {
     font: Circe Rounded;
+    width: 1072px;
 }
 .wrapperCalendarInfo {
     display: flex;
@@ -77,6 +78,7 @@
     padding: 5px;
     vertical-align: top;
     width: 153.14px;
+    max-width: 153.14px;
     height: 101px;
 }
 .otherMonth {

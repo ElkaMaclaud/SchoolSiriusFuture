@@ -20,7 +20,7 @@ const ProfileContent: FC<{ handleClick: () => void }> = ({ handleClick }) => {
         <Cross />
       </div>
       <div className={classes.profileWrapperContent}>
-      <p>Смена пользователя</p>
+      <div>Смена пользователя</div>
       {users.map((user) => {
         const key = user;
         return (

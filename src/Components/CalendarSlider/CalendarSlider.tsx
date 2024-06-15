@@ -83,7 +83,8 @@ const CalendarSlider: FC<ISelectProps> = ({ select, changeSchedule }) => {
             if (lessonDate.getMonth() === currentMonth - 2) {
               return {
                 backgroundColor: "transparent",
-                border: `${!lesson.wasAbsent ? "1px solid #79747F" : "1px solid #22782B"}`,
+                border: `${lesson.wasAbsent ? "1px solid #79747F" : "1px solid #22782B"}`,
+                textDecoration: `${lesson.wasAbsent ? "line-through" : "none"}`,
                 cursor: changeSchedule ? "pointer" : "auto",
               };
             } else if (
@@ -116,6 +117,7 @@ const CalendarSlider: FC<ISelectProps> = ({ select, changeSchedule }) => {
               style={getStyle()}
               parentValue={`${lesson.date.slice(11, 16)} - ${formattedTime}\n${lesson.lessonName}`}
               formattedTime={`${lesson.date.slice(11, 16)} - ${formattedTime}`}
+              edit={lessonDate.getMonth() === currentMonth - 2 ? false : true}
             />
           );
         })}
@@ -201,9 +203,9 @@ const CalendarSlider: FC<ISelectProps> = ({ select, changeSchedule }) => {
           <div onClick={() => changeMonth(-1)}>
             <Arrow left />
           </div>
-          <p className={classes.wrapperCalendarMothNane}>
+          <div className={classes.wrapperCalendarMothNane}>
             {capitalizedMonth} {currentYear}
-          </p>
+          </div>
           <div onClick={() => changeMonth(1)}>
             <Arrow />
           </div>

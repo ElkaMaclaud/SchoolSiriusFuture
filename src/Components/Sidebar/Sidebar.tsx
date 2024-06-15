@@ -18,11 +18,11 @@ const Sidebar = () => {
       </div>
       <ChapterList />
       <div className={classes.sidebarFooter}>
-        <p className={classes.sidebarFooterHeader}>Учитесь бесплатно</p>
-        <p className={classes.sidebarFooterDescription}>
+        <div className={classes.sidebarFooterHeader}>Учитесь бесплатно</div>
+        <div className={classes.sidebarFooterDescription}>
           Приводите друзей с детьми заниматься в Sirius Future и получайте
           подарки!
-        </p>
+        </div>
         <button>Узнать</button>
         <div className={classes.sidebarFooterGiftBox}>
           <GiftIllustration />

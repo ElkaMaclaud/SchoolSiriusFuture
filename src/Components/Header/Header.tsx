@@ -20,7 +20,7 @@ const Header = () => {
     return {
       width: `${width}px`,
       left: `${(left || 100) - width / 2 - 150}px`,
-      top: `${top ? top + 65 : 145}px`,
+      top: `${top ? top - 45 : 70}px`,
       border: "1px solid #7362BC",
       padding: "10px",
       height: "262px"

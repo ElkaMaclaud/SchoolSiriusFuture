@@ -1,7 +1,6 @@
 .wrapperCard {
-   padding: 20px;
    border: 1px solid #7362BC; 
    border-radius: 30px;
    display: flex;
-   justify-content: start;  
+   justify-content: start; 
 }

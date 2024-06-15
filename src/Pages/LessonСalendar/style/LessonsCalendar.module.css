@@ -40,7 +40,7 @@
     margin-top: 4px;
     transition: .3s ease-in;
   }
-  button {
+  .button, .buttonActive {
     height: 40px;
     gap: 8px;
     border-radius: 30px;
@@ -50,4 +50,14 @@
     border-radius: 30px;
     background-color: #DECFFF;
     color: #323854;
+    transition: .3s ease-in;
+}
+.buttonActive {
+  background-color: #8D7FC7;
+}
+.button:hover {
+  background-color: #8D7FC7;
+}
+.buttonActive:hover {
+  background-color: #DECFFF;
 }
