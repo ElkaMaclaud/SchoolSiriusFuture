@@ -16,7 +16,7 @@ import Pay from "../../UI_Component/Icons/Pay";
 const chapterList: IChapterList[] = [
   { component: <Home />, name: "Главная", path: "/profile" },
   { component: <Calendar />, name: "Расписание", path: "/lessonСalendar" },
-  { component: <Pay/>, name: "Оплата", path: "/pay" },
+  { component: <Pay />, name: "Оплата", path: "/pay" },
   { component: <Achievements />, name: "Достижения", path: "/achievements" },
   { component: <Puzzle />, name: "Тренажеры", path: "/puzzle" },
   { component: <Library />, name: "Библиотека", path: "/library" },
@@ -27,12 +27,16 @@ const chapterList: IChapterList[] = [
 
 const ChapterList = () => {
   const [chapter, setChapter] = useState(chapterList[0].name);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <div className={classes.sidebarChapterList}>
       {chapterList.map((item) => {
         return (
           <div
+            onClick={() => {
+              setChapter(item.name);
+              navigate(item.path);
+            }}
             key={item.name}
             className={
               chapter === item.name
@@ -43,7 +47,7 @@ const ChapterList = () => {
             {cloneElement(item.component, {
               color: chapter === item.name ? "#fff" : "#434B74",
             })}
-            <div onClick={() => {setChapter(item.name); navigate(item.path)}}>{item.name}</div>
+            <div>{item.name}</div>
           </div>
         );
       })}

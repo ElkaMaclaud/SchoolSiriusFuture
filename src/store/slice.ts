@@ -320,6 +320,7 @@ const slice = createSlice({
     builder.addCase(FETCH_USERS.fulfilled, (state, action) => {
       return {
         ...state,
+        loading: false,
         users: action.payload.data,
         success: true,
         page: "COMPLICATED",

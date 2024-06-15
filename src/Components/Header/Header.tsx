@@ -10,8 +10,7 @@ import { useAppSelector } from "../../store/reduxHooks";
 
 
 const Header = () => {
-  const { user} = useAppSelector(state=> state.page)
-  console.log("////////////////", user)
+  const { user } = useAppSelector((state) => state.page);
   const [showDropDown, setShowDropDown] = useToggle(false);
   const parentRef = useRef<HTMLDivElement>(null);
   const ref = useRef<HTMLDivElement>(null);
@@ -33,7 +32,7 @@ const Header = () => {
     <div className={classes.header} ref={parentRef} >
       <div className={classes.headerTitle}>
         Добро пожаловать,&ensp;
-        <p className={classes.headerUserName}>{"user.name"}</p>!
+        <p className={classes.headerUserName}>{user.email.split("@")[0] || "Дорогой друг"}</p>!
       </div>
       <div className={classes.headerAvatarWrapper}>
         <Avatar > <MessageChat /></Avatar>

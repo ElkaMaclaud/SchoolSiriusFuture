@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import classes from "./style/Sidebar.module.css";
 import SiriusLabel from "../../UI_Component/Icons/SiriusLabel";
 import GiftIllustration from "../../UI_Component/Icons/GiftIllustration";
@@ -7,9 +7,10 @@ import ChapterList from "../CapterList/ChapterList";
 
 
 const Sidebar = () => {
-  useEffect(() => {
-    // Запрос
-  });
+  // useEffect(() => {
+  //   Запрос для получения разделов
+  //   Но пока на бэке этого нет, просто из моковых данных на клиенте берем данные
+  // });
   return (
     <div className={classes.sidebar}>
       <div className={classes.sidebarLogo}>

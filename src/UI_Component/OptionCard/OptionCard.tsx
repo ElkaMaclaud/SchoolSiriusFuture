@@ -12,7 +12,7 @@ export const OptionCard: FC<{
   return (
     <div className={classes.wrapper} style={style}>
       {list.map((item) => {
-        const key = item
+        const key = Math.random().toString(36)
         return (
           <div
             onMouseOver={() => setHover(item)}

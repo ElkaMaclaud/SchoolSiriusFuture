@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { useAppSelector } from "./store/reduxHooks";
+import { useAppDispatch, useAppSelector } from "./store/reduxHooks";
 import MainPage from "./Pages/MainPage/MainPage";
 import PrivateRoute from "./HOC/PrivateRoute";
 import NotfoundPage from "./Pages/NotfoundPage/NotfoundPage";
@@ -11,12 +11,17 @@ import LessonСalendar from "./Pages/LessonСalendar/LessonСalendar";
 import Registration from "./Pages/Registration/Registration";
 import InaccessiblePage from "./Components/InaccessiblePage/InaccessiblePage";
 import AuthPage from "./Pages/AuthPage/AuthPage";
+import { SET_PAGE } from "./store/slice";
 
 function App() {
-    const { page } = useAppSelector((state) => state.page);
+    const { page, token } = useAppSelector((state) => state.page);
     const navigate = useNavigate();
+    const dispatch = useAppDispatch()
     useEffect(() => {
-        if (page === "LOGIN") {
+        if(token) {
+            dispatch(SET_PAGE("COMPLICATED"))
+        }
+        if (!token && page === "LOGIN") {
             navigate("/auth")
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
