@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import classes from "./style/TimeToNextLesson.module.css";
 import { ITimeToNextLesson } from "../../store/slice";
-import Button from "../../UI_Component/Button/Button";
 
 const TimeToNextLesson: FC<{ nextLesson: ITimeToNextLesson }> = ({
   nextLesson,
@@ -14,17 +13,9 @@ const TimeToNextLesson: FC<{ nextLesson: ITimeToNextLesson }> = ({
         <div  className={classes.dateWrapper}>{nextLesson.hours}</div><div className={classes.dateInfo}>ч</div>
         <div  className={classes.dateWrapper}>{nextLesson.minutes}</div><div className={classes.dateInfo}>мин</div>
       </div>
-      <Button
-        style={{
-          backgroundColor: "transparent",
-          width: "220px",
-          height: "48px",
-          color: "#323854",
-          border: "1px dashed #323854",
-        }}
-      >
+      <button className={classes.button}>
         Button
-      </Button>
+      </button>
     </div>
   );
 };

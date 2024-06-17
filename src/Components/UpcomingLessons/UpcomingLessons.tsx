@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import { ILesson } from "../../store/slice";
 import classes from "./style/UpcomingLessons.module.css";
-import Button from "../../UI_Component/Button/Button";
 import Account from "../../UI_Component/Icons/Account";
 import { getDay, getMonth } from "../../utils/getDate";
 import { getDurationLesson } from "../../utils/getDurationLesson";
@@ -29,7 +28,8 @@ const UpcomingLessons: FC<{ lessons: ILesson[] }> = ({ lessons }) => {
             </div>
             <div className={classes.lessonTeacher}>{lesson.teacher}</div>
             <div className={classes.lessonButtons}>
-              <Button
+              <button
+                className={classes.button}              
                 style={{
                   backgroundColor: "#fff",
                   width: "56px",
@@ -41,8 +41,9 @@ const UpcomingLessons: FC<{ lessons: ILesson[] }> = ({ lessons }) => {
                 }}
               >
                 Button
-              </Button>
-              <Button
+              </button>
+              <button
+                className={classes.button}
                 style={{
                   backgroundColor: "#8D7FC7",
                   width: "56px",
@@ -53,12 +54,13 @@ const UpcomingLessons: FC<{ lessons: ILesson[] }> = ({ lessons }) => {
                 }}
               >
                 Button
-              </Button>
+              </button>
             </div>
           </li>
         ))}
       </ul>
-      <Button
+      <button
+        className={classes.button}
         style={{
           backgroundColor: "#DECFFF",
           width: "344px",
@@ -67,7 +69,7 @@ const UpcomingLessons: FC<{ lessons: ILesson[] }> = ({ lessons }) => {
         }}
       >
         Button
-      </Button>
+      </button>
     </div>
   );
 };

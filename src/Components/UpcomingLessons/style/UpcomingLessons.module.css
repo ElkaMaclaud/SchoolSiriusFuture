@@ -78,3 +78,12 @@ ul {
     font-weight: 300;
     line-height: 12px;
 }
+.button {
+    height: 40px;
+    gap: 8px;
+    border-radius: 30px;
+    opacity: 0px;
+    background-color: #DECFFF;
+    color: #323854;
+    cursor: pointer;
+}

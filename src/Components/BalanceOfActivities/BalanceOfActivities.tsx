@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import classes from "./style/BalanceOfActivities.module.css";
 import { ICountLessons } from "../../store/slice";
-import Button from "../../UI_Component/Button/Button";
 
 const BalanceOfActivities: FC<{ listLessons: ICountLessons }> = ({
   listLessons,
@@ -17,16 +16,11 @@ const BalanceOfActivities: FC<{ listLessons: ICountLessons }> = ({
           </li>
         ))}
       </ul>
-      <Button
-        style={{
-          backgroundColor: "#DECFFF",
-          width: "100%",
-          height: "40px",
-          color: "#323854",
-        }}
+      <button
+      className={classes.button}
       >
         Button
-      </Button>
+      </button>
     </div>
   );
 };
