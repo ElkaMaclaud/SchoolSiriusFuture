@@ -9,6 +9,7 @@
     margin-top: 45px;
 }
 .contentWrapper {
+    width: calc(1440px - 128px);
     max-width: calc(1440px - 128px);
     display: flex;
     flex-direction: column;
