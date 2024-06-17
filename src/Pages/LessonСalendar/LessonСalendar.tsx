@@ -46,7 +46,7 @@ const LessonСalendar = () => {
           </div>
           <div>
             <button
-              className={classes.buttonLessonСalendar}
+              className={classes.button}
               onClick={() => setChangeSchedule(!changeSchedule)}
             >
               Изменить расписание
