@@ -21,27 +21,27 @@
     justify-content: space-between;
     align-items: center;
   }
-  .select input {
+.select input {
     cursor: default;
     width: 80%;
     outline: none;
     border: none;
     height: calc(36px - 2px);
   }
-  input::placeholder {
+input::placeholder {
     font-size: 12px;
     font-weight: 400;
     line-height: 16.2px;
     color: #79747F;
   }
-  .select svg {
+.select svg {
     width: 16px;
     height: 16px;
     color: #79747F;
     margin-top: 4px;
     transition: .3s ease-in;
   }
-  .button  {
+.button, .buttonActive   {
     height: 40px;
     gap: 8px;
     border-radius: 30px;
@@ -54,4 +54,13 @@
 }
 .button:hover {
   background-color: #8D7FC7;
+}
+.buttonActive {
+  background-color: #8D7FC7;
+}
+.button:hover {
+  background-color: #8D7FC7;
+}
+.buttonActive:hover {
+  background-color: #DECFFF;
 }

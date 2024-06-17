@@ -46,11 +46,10 @@ const LessonСalendar = () => {
           </div>
           <div>
             <button
-              className={classes.button}
+              className={changeSchedule ? classes.buttonActive : classes.button}
               onClick={() => setChangeSchedule(!changeSchedule)}
             >
-              Изменить расписание
-              {/* {changeSchedule ? "Изменить расписание" : "Схранить изменения"} */}
+              {changeSchedule ? "Изменить расписание" : "Схранить изменения"}
             </button>
           </div>
           {showDropDown && (

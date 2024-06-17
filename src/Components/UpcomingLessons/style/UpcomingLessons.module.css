@@ -78,31 +78,3 @@ ul {
     font-weight: 300;
     line-height: 12px;
 }
-.button, .buttonChildWhite, .buttonChildPurple {
-    height: 40px;
-    gap: 8px;
-    border-radius: 30px;
-    background-color: #DECFFF;
-    color: #323854;
-    cursor: pointer;
-    width: 344px;
-    height: 40px;
-    color: #323854;
-}
-.buttonChildWhite {
-    background-color: #fff;
-    width: 56px;
-    height: 32px;
-    color: #323854;
-    border: 1px solid #8D7FC7;
-    padding: 8px 10px 8px 10px;
-    font-size: 12px; 
-}
-.buttonChildPurple {
-    background-color: #8D7FC7;
-    width: 56px;
-    height: 32px;
-    color: #fff;
-    padding: 8px 10px 8px 10px;
-    font-size: 12px;
-}

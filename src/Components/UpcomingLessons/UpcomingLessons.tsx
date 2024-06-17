@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { ILesson } from "../../store/slice";
 import classes from "./style/UpcomingLessons.module.css";
+import Button from "../../UI_Component/Button/Button";
 import Account from "../../UI_Component/Icons/Account";
 import { getDay, getMonth } from "../../utils/getDate";
 import { getDurationLesson } from "../../utils/getDurationLesson";
@@ -10,7 +11,7 @@ const UpcomingLessons: FC<{ lessons: ILesson[] }> = ({ lessons }) => {
     <div className={classes.wrapper}>
       <h2>Ближайшие уроки</h2>
       <ul>
-        {lessons.map((lesson) => (
+        {lessons.length > 0 && lessons.map((lesson) => (
           <li key={lesson.date} className={classes.lesson}>
             <div className={classes.lessonDate}>
               <div className={classes.lessonDateDay}>{getDay(lesson.date)}</div>
@@ -28,25 +29,45 @@ const UpcomingLessons: FC<{ lessons: ILesson[] }> = ({ lessons }) => {
             </div>
             <div className={classes.lessonTeacher}>{lesson.teacher}</div>
             <div className={classes.lessonButtons}>
-              <button
-                className={classes.buttonChildWhite}              
+              <Button
+                style={{
+                  backgroundColor: "#fff",
+                  width: "56px",
+                  height: "32px",
+                  color: "#323854",
+                  border: "1px solid #8D7FC7",
+                  padding: "8px 10px 8px 10px",
+                  fontSize: "12px",
+                }}
               >
                 Button
-              </button>
-              <button
-                className={classes.buttonChildPurple}
+              </Button>
+              <Button
+                style={{
+                  backgroundColor: "#8D7FC7",
+                  width: "56px",
+                  height: "32px",
+                  color: "#fff",
+                  padding: "8px 10px 8px 10px",
+                  fontSize: "12px",
+                }}
               >
                 Button
-              </button>
+              </Button>
             </div>
           </li>
         ))}
       </ul>
-      <button
-        className={classes.button}
+      <Button
+        style={{
+          backgroundColor: "#DECFFF",
+          width: "344px",
+          height: "40px",
+          color: "#323854",
+        }}
       >
         Button
-      </button>
+      </Button>
     </div>
   );
 };
