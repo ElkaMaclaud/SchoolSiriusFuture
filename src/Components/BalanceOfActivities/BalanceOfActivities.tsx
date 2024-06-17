@@ -16,11 +16,7 @@ const BalanceOfActivities: FC<{ listLessons: ICountLessons }> = ({
           </li>
         ))}
       </ul>
-      <button
-      className={classes.button}
-      >
-        Button
-      </button>
+      <button className={classes.button}>Button</button>
     </div>
   );
 };
