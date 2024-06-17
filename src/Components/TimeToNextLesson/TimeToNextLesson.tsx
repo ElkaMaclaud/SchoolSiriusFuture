@@ -13,7 +13,7 @@ const TimeToNextLesson: FC<{ nextLesson: ITimeToNextLesson }> = ({
         <div  className={classes.dateWrapper}>{nextLesson.hours}</div><div className={classes.dateInfo}>ч</div>
         <div  className={classes.dateWrapper}>{nextLesson.minutes}</div><div className={classes.dateInfo}>мин</div>
       </div>
-      <button className={classes.button}>
+      <button className={classes.buttonTimeToNextLesson}>
         Button
       </button>
     </div>

@@ -41,7 +41,7 @@
     margin-top: 4px;
     transition: .3s ease-in;
   }
-  .button, .buttonActive {
+  .buttonLessonСalendar  {
     height: 40px;
     gap: 8px;
     border-radius: 30px;
@@ -53,12 +53,6 @@
     color: #323854;
     transition: .3s ease-in;
 }
-.buttonActive {
+.buttonLessonСalendar:hover {
   background-color: #8D7FC7;
-}
-.button:hover {
-  background-color: #8D7FC7;
-}
-.buttonActive:hover {
-  background-color: #DECFFF;
 }

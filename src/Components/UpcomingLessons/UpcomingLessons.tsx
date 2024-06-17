@@ -29,29 +29,12 @@ const UpcomingLessons: FC<{ lessons: ILesson[] }> = ({ lessons }) => {
             <div className={classes.lessonTeacher}>{lesson.teacher}</div>
             <div className={classes.lessonButtons}>
               <button
-                className={classes.button}              
-                style={{
-                  backgroundColor: "#fff",
-                  width: "56px",
-                  height: "32px",
-                  color: "#323854",
-                  border: "1px solid #8D7FC7",
-                  padding: "8px 10px 8px 10px",
-                  fontSize: "12px",
-                }}
+                className={classes.buttonChildWhite}              
               >
                 Button
               </button>
               <button
-                className={classes.button}
-                style={{
-                  backgroundColor: "#8D7FC7",
-                  width: "56px",
-                  height: "32px",
-                  color: "#fff",
-                  padding: "8px 10px 8px 10px",
-                  fontSize: "12px",
-                }}
+                className={classes.buttonChildPurple}
               >
                 Button
               </button>
@@ -61,12 +44,6 @@ const UpcomingLessons: FC<{ lessons: ILesson[] }> = ({ lessons }) => {
       </ul>
       <button
         className={classes.button}
-        style={{
-          backgroundColor: "#DECFFF",
-          width: "344px",
-          height: "40px",
-          color: "#323854",
-        }}
       >
         Button
       </button>
