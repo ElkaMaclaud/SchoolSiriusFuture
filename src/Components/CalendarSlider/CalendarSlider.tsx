@@ -125,7 +125,7 @@ const CalendarSlider: FC<ISelectProps> = ({ select, changeSchedule }) => {
     let date = firstDate;
     let calendarRows = [];
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
       let cells = [];
       for (let j = 0; j < 7; j++) {
         const currentDate = new Date(currentYear, currentMonth - 1, date);

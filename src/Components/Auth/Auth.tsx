@@ -23,6 +23,7 @@ const actionCreators: ActionCreators = {
 const Auth: FC<{ action: string }> = ({ action }) => {
   const [hide, setHide] = useState<boolean>(true);
   const { user, language, success } = useAppSelector((state) => state.page);
+  const [checked, setChecked] = useState(false)
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({
@@ -101,7 +102,7 @@ const Auth: FC<{ action: string }> = ({ action }) => {
               </div>
             </div>
             <label>
-              <input type="checkbox" name="" id="" />
+              <input type="checkbox" name="" id="" onChange={() => setChecked(!checked)}/>
               {language === "RU" ? "Запомнить меня" : "Remember me"}
             </label>
             <button
