@@ -29,7 +29,7 @@ export interface IInitialState {
   success: boolean;
   token: string | null;
   user: IAuthorization;
-  page: "LOADING" | "COMPLICATED" | "LOGIN";
+  page: "COMPLICATED" | "LOGIN";
   language: "RU" | "EN";
   role: "STUDENT" | "TRAINER";
   lessons: ILesson[];
@@ -270,13 +270,6 @@ const slice = createSlice({
         message: action.payload as string,
       };
     });
-    builder.addCase(AUTH_USER.pending, (state, action) => {
-      return {
-        ...state,
-        success: false,
-        page: "LOADING",
-      };
-    });
     builder.addCase(AUTH_USER.fulfilled, (state, action) => {
       localStorage.setItem("access_token", action.payload.token);
       return {
@@ -302,7 +295,13 @@ const slice = createSlice({
         timeToNextLesson: action.payload.data.timeToNextLesson,
         success: true,
         loading: false,
-        page: "COMPLICATED",
+      };
+    });
+    builder.addCase(FETCH_UPCOMING_LESSONS.rejected, (state, action) => {
+      return {
+        ...state,
+        token: "",
+        page: "LOGIN",
       };
     });
     builder.addCase(FETCH_LESSONS_COUNTS.fulfilled, (state, action) => {
@@ -310,7 +309,13 @@ const slice = createSlice({
         ...state,
         success: true,
         listLessons: action.payload.data,
-        page: "COMPLICATED",
+      };
+    });
+    builder.addCase(FETCH_LESSONS_COUNTS.rejected, (state, action) => {
+      return {
+        ...state,
+        token: "",
+        page: "LOGIN",
       };
     });
     builder.addCase(FETCH_LESSONS_NAME_AND_DATE.fulfilled, (state, action) => {
@@ -319,7 +324,6 @@ const slice = createSlice({
         loading: false,
         lessons: action.payload.data,
         success: true,
-        page: "COMPLICATED",
       };
     });
     builder.addCase(FETCH_USERS.fulfilled, (state, action) => {
@@ -327,7 +331,6 @@ const slice = createSlice({
         ...state,
         users: action.payload.data,
         success: true,
-        page: "COMPLICATED",
       };
     });
   },

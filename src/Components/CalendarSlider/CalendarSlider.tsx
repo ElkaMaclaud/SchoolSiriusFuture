@@ -84,7 +84,9 @@ const CalendarSlider: FC<ISelectProps> = ({ select, changeSchedule }) => {
             if (lessonDate.getMonth() === currentMonth - 2) {
               return {
                 backgroundColor: "transparent",
-                border: `${lesson.wasAbsent ? "1px solid #79747F" : "1px solid #22782B"}`,
+                border: `${
+                  lesson.wasAbsent ? "1px solid #79747F" : "1px solid #22782B"
+                }`,
                 textDecoration: `${lesson.wasAbsent ? "line-through" : "none"}`,
                 cursor: changeSchedule ? "pointer" : "auto",
               };
@@ -102,14 +104,17 @@ const CalendarSlider: FC<ISelectProps> = ({ select, changeSchedule }) => {
             };
           };
           const lessonDate = new Date(lesson.date);
-          const formattedTime = getDurationLesson(lesson.date)
-           return (
+          const formattedTime = getDurationLesson(lesson.date);
+          const key = Math.random().toString(36);
+          return (
             <CellContent
-              key={lesson.date}
+              key={key}
               changeSchedule={changeSchedule}
               lesson={lesson}
               style={getStyle()}
-              parentValue={`${lesson.date.slice(11, 16)} - ${formattedTime}\n${lesson.lessonName}`}
+              parentValue={`${lesson.date.slice(11, 16)} - ${formattedTime}\n${
+                lesson.lessonName
+              }`}
               formattedTime={`${lesson.date.slice(11, 16)} - ${formattedTime}`}
               edit={lessonDate.getMonth() === currentMonth - 2 ? false : true}
             />
@@ -229,21 +234,26 @@ const CalendarSlider: FC<ISelectProps> = ({ select, changeSchedule }) => {
           )}
         </div>
       </div>
-      <table className={classes.wrapperCalendarTable}>
-        <thead>
-          <tr>
-            <th>Пн</th>
-            <th>Вт</th>
-            <th>Ср</th>
-            <th>Чт</th>
-            <th>Пт</th>
-            <th>Сб</th>
-            <th>Вс</th>
-          </tr>
-        </thead>
-        {loading && <div className={classes.spinnerWrapper}><Spinner /></div>}
-        <tbody>{createCalendarRender()}</tbody>
-      </table>
+      {!loading ? (
+        <table className={classes.wrapperCalendarTable}>
+          <thead>
+            <tr>
+              <th>Пн</th>
+              <th>Вт</th>
+              <th>Ср</th>
+              <th>Чт</th>
+              <th>Пт</th>
+              <th>Сб</th>
+              <th>Вс</th>
+            </tr>
+          </thead>
+          <tbody>{createCalendarRender()}</tbody>
+        </table>
+      ) : (
+        <div className={classes.spinnerWrapper}>
+          <Spinner />
+        </div>
+      )}
     </div>
   );
 };

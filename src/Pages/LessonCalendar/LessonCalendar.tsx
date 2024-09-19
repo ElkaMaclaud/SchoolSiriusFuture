@@ -13,7 +13,7 @@ export const optionsSort = [
   "Скорочтение",
 ];
 
-const LessonСalendar = () => {
+const LessonCalendar = () => {
   const ref = useRef<HTMLDivElement>(null);
   const refParent = useRef<HTMLDivElement>(null);
   const [showDropDown, toggleShowDropDown] = useToggle(false);
@@ -75,4 +75,4 @@ const LessonСalendar = () => {
   );
 };
 
-export default LessonСalendar;
+export default LessonCalendar;

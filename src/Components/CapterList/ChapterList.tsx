@@ -17,7 +17,7 @@ import { SET_MEET_THE_USER } from "../../store/slice";
 
 const chapterList: IChapterList[] = [
   { component: <Home />, name: "Главная", path: "/profile" },
-  { component: <Calendar />, name: "Расписание", path: "/lessonСalendar" },
+  { component: <Calendar />, name: "Расписание", path: "/lessonCalendar" },
   { component: <Pay />, name: "Оплата", path: "/pay" },
   { component: <Achievements />, name: "Достижения", path: "/achievements" },
   { component: <Puzzle />, name: "Тренажеры", path: "/puzzle" },
