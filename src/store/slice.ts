@@ -29,10 +29,11 @@ export interface IInitialState {
   success: boolean;
   token: string | null;
   user: IAuthorization;
-  page: "COMPLICATED" | "LOGIN";
+  page: "LOADING" | "COMPLICATED" | "LOGIN";
   language: "RU" | "EN";
   role: "STUDENT" | "TRAINER";
   lessons: ILesson[];
+  lessonСalendar: ILesson[];
   listLessons: ICountLessons;
   loading: boolean;
   timeToNextLesson: ITimeToNextLesson;
@@ -43,10 +44,11 @@ const state: IInitialState = {
   success: false,
   token: localStorage.getItem("access_token"),
   user: { email: "", password: "", name: "" },
-  page: "LOGIN",
+  page: "LOADING",
   language: "RU",
   role: "STUDENT",
   lessons: [],
+  lessonСalendar: [],
   listLessons: {},
   loading: false,
   timeToNextLesson: { days: 0, hours: 0, minutes: 0 },
@@ -277,7 +279,7 @@ const slice = createSlice({
         success: true,
         token: action.payload.token,
         message: "Success",
-        page: "COMPLICATED",
+        page: "LOADING",
       };
     });
     builder.addCase(AUTH_USER.rejected, (state, action) => {
@@ -294,13 +296,11 @@ const slice = createSlice({
         lessons: action.payload.data.lessons,
         timeToNextLesson: action.payload.data.timeToNextLesson,
         success: true,
-        loading: false,
       };
     });
     builder.addCase(FETCH_UPCOMING_LESSONS.rejected, (state, action) => {
       return {
         ...state,
-        token: "",
         page: "LOGIN",
       };
     });
@@ -309,6 +309,7 @@ const slice = createSlice({
         ...state,
         success: true,
         listLessons: action.payload.data,
+        page: "COMPLICATED",
       };
     });
     builder.addCase(FETCH_LESSONS_COUNTS.rejected, (state, action) => {
@@ -322,8 +323,16 @@ const slice = createSlice({
       return {
         ...state,
         loading: false,
-        lessons: action.payload.data,
+        lessonСalendar: action.payload.data,
         success: true,
+        page:"COMPLICATED"
+      };
+    });
+    builder.addCase(FETCH_LESSONS_NAME_AND_DATE.rejected, (state, action) => {
+      return {
+        ...state,
+        token: "",
+        page: "LOGIN",
       };
     });
     builder.addCase(FETCH_USERS.fulfilled, (state, action) => {
@@ -331,6 +340,11 @@ const slice = createSlice({
         ...state,
         users: action.payload.data,
         success: true,
+      };
+    });
+    builder.addCase(FETCH_USERS.rejected, (state, action) => {
+      return {
+        ...state,
       };
     });
   },

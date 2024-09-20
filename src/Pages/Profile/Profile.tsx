@@ -1,11 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import CardClass from "../../UI_Component/CardClass/CardClass";
-import {
-  FETCH_LESSONS_COUNTS,
-  FETCH_UPCOMING_LESSONS,
-  SET_LOADING,
-} from "../../store/slice";
-import { useAppDispatch, useAppSelector } from "../../store/reduxHooks";
+import { useAppSelector } from "../../store/reduxHooks";
 import BalanceOfActivities from "../../Components/BalanceOfActivities/BalanceOfActivities";
 import AdvertisingCard from "../../Components/AdvertisingCard/AdvertisingCard";
 import classes from "./style/Profile.module.css";
@@ -18,14 +13,6 @@ const Profile = () => {
   const { loading, lessons, timeToNextLesson, listLessons } = useAppSelector(
     (state) => state.page
   );
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(SET_LOADING(true));
-    dispatch(FETCH_LESSONS_COUNTS());
-    dispatch(FETCH_UPCOMING_LESSONS());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <div className={classes.wrapper}>
       <div className={classes.contentCards}>

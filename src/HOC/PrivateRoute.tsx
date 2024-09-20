@@ -9,11 +9,13 @@ const PrivateRoute: FC<{ children: ReactNode }> = ({
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (page === "COMPLICATED") {
+        const currentPath = window.location.pathname;
+        if (
+            (currentPath === "/auth" ||
+                currentPath === "/registration") && page === "COMPLICATED") {
             navigate("/profile", {replace: true});
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [navigate, page]);
     return <Fragment>{children}</Fragment>;
 };
 

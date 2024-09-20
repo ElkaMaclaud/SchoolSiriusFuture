@@ -22,7 +22,7 @@ interface ISelectProps {
 }
 
 const CalendarSlider: FC<ISelectProps> = ({ select, changeSchedule }) => {
-  const { lessons, loading } = useAppSelector((state) => state.page);
+  const { lessonСalendar, loading } = useAppSelector((state) => state.page);
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
   const ref = useRef<HTMLDivElement>(null);
@@ -135,7 +135,7 @@ const CalendarSlider: FC<ISelectProps> = ({ select, changeSchedule }) => {
       for (let j = 0; j < 7; j++) {
         const currentDate = new Date(currentYear, currentMonth - 1, date);
 
-        const lessonsForDate = lessons.filter((lesson) => {
+        const lessonsForDate = lessonСalendar.filter((lesson) => {
           const lessonDate = new Date(lesson.date);
 
           return (
