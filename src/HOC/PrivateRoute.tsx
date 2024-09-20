@@ -3,20 +3,23 @@ import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../store/reduxHooks";
 
 const PrivateRoute: FC<{ children: ReactNode }> = ({
-    children,
+  children,
 }): JSX.Element | null => {
-    const page = useAppSelector((state) => state.page.page);
-    const navigate = useNavigate();
+  const page = useAppSelector((state) => state.page.page);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        const currentPath = window.location.pathname;
-        if (
-            (currentPath === "/auth" ||
-                currentPath === "/registration") && page === "COMPLICATED") {
-            navigate("/profile", {replace: true});
-        }
-    }, [navigate, page]);
-    return <Fragment>{children}</Fragment>;
+  useEffect(() => {
+    const currentPath = window.location.pathname;
+    if (
+      (currentPath === "/auth" ||
+        currentPath === "/registration" ||
+        currentPath === "/") &&
+      page === "COMPLICATED"
+    ) {
+      navigate("/profile", { replace: true });
+    }
+  }, [navigate, page]);
+  return <Fragment>{children}</Fragment>;
 };
 
 export default PrivateRoute;

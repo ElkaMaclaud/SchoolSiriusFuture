@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect } from "react";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./store/reduxHooks";
 import MainPage from "./Pages/MainPage/MainPage";
 import PrivateRoute from "./HOC/PrivateRoute";
@@ -9,26 +9,24 @@ import Profile from "./Pages/Profile/Profile";
 import LessonСalendar from "./Pages/LessonCalendar/LessonCalendar";
 import Registration from "./Pages/Registration/Registration";
 import AuthPage from "./Pages/AuthPage/AuthPage";
-import { FETCH_LESSONS_COUNTS, FETCH_UPCOMING_LESSONS } from "./store/slice";
+import {
+  FETCH_LESSONS_COUNTS,
+  FETCH_UPCOMING_LESSONS,
+} from "./store/slice";
 import LoadingPage from "./Pages/LoadingPage/LoadingPage";
 
 function App() {
   const { page, token } = useAppSelector((state) => state.page);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const location = useLocation();
   useEffect(() => {
-    const currentPath = location.pathname;
-
     if (token) {
-      // if (currentPath === "/profile") {
-        dispatch(FETCH_LESSONS_COUNTS());
-        dispatch(FETCH_UPCOMING_LESSONS());
-      //}
-    } else {
+      dispatch(FETCH_LESSONS_COUNTS());
+      dispatch(FETCH_UPCOMING_LESSONS());
+    } else if (page === "LOGIN") {
       navigate("/auth");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    } 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   interface Elements {
     [key: string]: ReactElement;
@@ -38,7 +36,6 @@ function App() {
       lessonCalendar: <LessonСalendar />,
       profile: <Profile />,
     };
-
     return (
       <PrivateRoute>
         <Routes>

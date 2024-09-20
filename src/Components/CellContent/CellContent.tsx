@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef, CSSProperties } from "react";
+import React, { FC, useState, useRef, CSSProperties, ChangeEvent } from "react";
 import { ILesson } from "../../store/slice";
 import classes from "./style/CellContent.module.css";
 import Pay from "../../UI_Component/Icons/Pay";
@@ -17,15 +17,17 @@ const CellContent: FC<{
   const inputRef = useRef<HTMLInputElement | null>(null);
   const inputRefTwo = useRef<HTMLInputElement | null>(null);
 
+  const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value)
+  }
+
   if (changeSchedule && change && edit) {
     return (
       <div className={classes.cardInput}>
         <input
           type="text"
           ref={inputRef}
-          onChange={(e) => {
-            setValue(e.target.value);
-          }}
+          onChange={handleChange}
           value={value}
         />
         {!lesson.paid && <Pay color={"#E12828"} />}
