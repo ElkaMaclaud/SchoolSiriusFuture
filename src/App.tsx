@@ -27,7 +27,7 @@ function App() {
       navigate("/auth");
     } 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [token]);
   interface Elements {
     [key: string]: ReactElement;
   }
