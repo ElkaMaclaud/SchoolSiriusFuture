@@ -42,7 +42,7 @@ const ChapterList = () => {
   useEffect(()=> {
     setChapter(chapterList.find(item=>item.path===location.pathname)?.name || "")
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [location])
   
   return (
     <div className={classes.sidebarChapterList}>
