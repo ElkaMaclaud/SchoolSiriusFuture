@@ -14,11 +14,13 @@ export interface IData {
   timeToNextLesson: ITimeToNextLesson;
 }
 export interface ILesson {
+  _id: string;
   lessonName: string;
   date: string;
   teacher: string;
   paid: boolean;
   wasAbsent: boolean;
+  modified?: boolean
 }
 export interface ITimeToNextLesson {
   days: number;
@@ -243,6 +245,9 @@ const slice = createSlice({
     SET_LOADING: (state, action) => {
       state.loading = action.payload;
     },
+    SET_CHANGE_LESSONS: (state, action) => {
+      state.lessonСalendar = action.payload;
+    },
     SET_MEET_THE_USER: (state, action) => {
       state.meetTheUser = action.payload;
     },
@@ -350,6 +355,6 @@ const slice = createSlice({
   },
 });
 
-export const { SET_LANGUAGE, SET_LOADING,  SET_MEET_THE_USER, SET_PAGE, SET_USER_DATA } =
+export const { SET_LANGUAGE, SET_LOADING, SET_CHANGE_LESSONS, SET_MEET_THE_USER, SET_PAGE, SET_USER_DATA } =
   slice.actions;
 export default slice.reducer;

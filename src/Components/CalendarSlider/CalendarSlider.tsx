@@ -14,7 +14,6 @@ import {
 } from "../../store/slice";
 import Spinner from "../Spinner/Spinner";
 import CellContent from "../CellContent/CellContent";
-import { getDurationLesson } from "../../utils/getDurationLesson";
 
 interface ISelectProps {
   select: string;
@@ -104,7 +103,6 @@ const CalendarSlider: FC<ISelectProps> = ({ select, changeSchedule }) => {
             };
           };
           const lessonDate = new Date(lesson.date);
-          const formattedTime = getDurationLesson(lesson.date);
           const key = Math.random().toString(36);
           return (
             <CellContent
@@ -112,10 +110,6 @@ const CalendarSlider: FC<ISelectProps> = ({ select, changeSchedule }) => {
               changeSchedule={changeSchedule}
               lesson={lesson}
               style={getStyle()}
-              parentValue={`${lesson.date.slice(11, 16)} - ${formattedTime}\n${
-                lesson.lessonName
-              }`}
-              formattedTime={`${lesson.date.slice(11, 16)} - ${formattedTime}`}
               edit={lessonDate.getMonth() === currentMonth - 2 ? false : true}
             />
           );

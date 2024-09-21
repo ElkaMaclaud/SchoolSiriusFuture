@@ -19,7 +19,6 @@ const LessonCalendar = () => {
   const [showDropDown, toggleShowDropDown] = useToggle(false);
   const [select, setSelect] = useState("");
   const [changeSchedule, setChangeSchedule] = useState(false);
-  const [changedList, setChangedList] = useState([])
 
   const saveChanges = () => {
     setChangeSchedule(!changeSchedule)
