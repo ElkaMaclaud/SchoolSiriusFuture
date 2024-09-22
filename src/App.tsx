@@ -9,10 +9,7 @@ import Profile from "./Pages/Profile/Profile";
 import LessonСalendar from "./Pages/LessonCalendar/LessonCalendar";
 import Registration from "./Pages/Registration/Registration";
 import AuthPage from "./Pages/AuthPage/AuthPage";
-import {
-  FETCH_LESSONS_COUNTS,
-  FETCH_UPCOMING_LESSONS,
-} from "./store/slice";
+import { FETCH_LESSONS_COUNTS, FETCH_UPCOMING_LESSONS } from "./store/slice";
 import LoadingPage from "./Pages/LoadingPage/LoadingPage";
 
 function App() {
@@ -20,13 +17,13 @@ function App() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   useEffect(() => {
-    if (token) {
+    if (page === "LOADING") {
       dispatch(FETCH_LESSONS_COUNTS());
       dispatch(FETCH_UPCOMING_LESSONS());
     } else if (page === "LOGIN") {
-      navigate("/auth");
-    } 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+      token ? navigate("/auth") : navigate("/registration");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
   interface Elements {
     [key: string]: ReactElement;

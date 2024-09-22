@@ -57,7 +57,7 @@ const CellContent: FC<{
           if (les._id === lesson._id) {
             return newLesson;
           }
-          return lesson;
+          return les;
         })
       )
     );

@@ -20,7 +20,7 @@ export interface ILesson {
   teacher: string;
   paid: boolean;
   wasAbsent: boolean;
-  modified?: boolean
+  modified?: boolean;
 }
 export interface ITimeToNextLesson {
   days: number;
@@ -39,8 +39,8 @@ export interface IInitialState {
   listLessons: ICountLessons;
   loading: boolean;
   timeToNextLesson: ITimeToNextLesson;
-  users: IAuthorization[],
-  meetTheUser: boolean,
+  users: IAuthorization[];
+  meetTheUser: boolean;
 }
 const state: IInitialState = {
   success: false,
@@ -55,7 +55,7 @@ const state: IInitialState = {
   loading: false,
   timeToNextLesson: { days: 0, hours: 0, minutes: 0 },
   users: [],
-  meetTheUser: true
+  meetTheUser: true,
 };
 export const REGISTR_USER = createAsyncThunk<
   { success: boolean; message: string },
@@ -170,8 +170,8 @@ export const FETCH_UPCOMING_LESSONS = createAsyncThunk<
         },
       }
     );
-   
-    const data = await response.json(); 
+
+    const data = await response.json();
     if (data.success) {
       return data;
     } else {
@@ -213,22 +213,18 @@ export const UPDATE_LESSONS = createAsyncThunk<
   { rejectValue: string; state: RootState }
 >("page/UPDATE_LESSONS", async (_, { rejectWithValue, getState }) => {
   try {
-    const response = await fetch(
-      "https://scool-server.vercel.app/api/updateLessons",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getState().page.token}`,
-        },
-        body: JSON.stringify({
-          ...getState().page.lessonСalendar
-        })
-      }
-    );
+    const response = await fetch("https://scool-server.vercel.app/api/updateLessons", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getState().page.token}`,
+      },
+      body: JSON.stringify(getState().page.lessonСalendar),
+    });
 
     const data = await response.json();
     if (data.success) {
+      
       return data;
     } else {
       throw new Error(data.message);
@@ -360,7 +356,7 @@ const slice = createSlice({
         loading: false,
         lessonСalendar: action.payload.data,
         success: true,
-        page:"COMPLICATED"
+        page: "COMPLICATED",
       };
     });
     builder.addCase(FETCH_LESSONS_NAME_AND_DATE.rejected, (state, action) => {
@@ -385,6 +381,12 @@ const slice = createSlice({
   },
 });
 
-export const { SET_LANGUAGE, SET_LOADING, SET_CHANGE_LESSONS, SET_MEET_THE_USER, SET_PAGE, SET_USER_DATA } =
-  slice.actions;
+export const {
+  SET_LANGUAGE,
+  SET_LOADING,
+  SET_CHANGE_LESSONS,
+  SET_MEET_THE_USER,
+  SET_PAGE,
+  SET_USER_DATA,
+} = slice.actions;
 export default slice.reducer;

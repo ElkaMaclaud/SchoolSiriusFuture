@@ -25,7 +25,7 @@ const LessonCalendar = () => {
 
   const saveChanges = () => {
     setChangeSchedule(!changeSchedule)
-    dispatch(UPDATE_LESSONS())
+    changeSchedule && dispatch(UPDATE_LESSONS())
   }
 
   const handleChange = (select: string) => {
