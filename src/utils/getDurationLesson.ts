@@ -7,10 +7,6 @@ export function getDurationLesson(date: string, operator: string = "+") {
       '-': (time: number, duration: number) => time - duration * 60000
   };
 
-  if (!operations[operator]) {
-      throw new Error('Неверный оператор. Используйте "+" или "-".');
-  }
-
   lessonDate.setTime(operations[operator](lessonDate.getTime(), durationInMinutes));
   
   const formattedTime = lessonDate.toLocaleTimeString([], {

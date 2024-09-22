@@ -126,7 +126,7 @@ export const FETCH_LESSONS_NAME_AND_DATE = createAsyncThunk<
     const { name, startDate, endDate } = dto;
     try {
       const response = await fetch(
-        "https://scool-server.vercel.app/api/lessonsDate",
+        "https://scool-server.vercel.app/api/lessonsByDate",
         {
           method: "POST",
           headers: {
@@ -197,6 +197,36 @@ export const FETCH_LESSONS_COUNTS = createAsyncThunk<
         },
       }
     );
+    const data = await response.json();
+    if (data.success) {
+      return data;
+    } else {
+      throw new Error(data.message);
+    }
+  } catch (error) {
+    return rejectWithValue(`${error}`);
+  }
+});
+export const UPDATE_LESSONS = createAsyncThunk<
+  { success: boolean; message: string; data: IAuthorization[] },
+  undefined,
+  { rejectValue: string; state: RootState }
+>("page/UPDATE_LESSONS", async (_, { rejectWithValue, getState }) => {
+  try {
+    const response = await fetch(
+      "https://scool-server.vercel.app/api/updateLessons",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getState().page.token}`,
+        },
+        body: JSON.stringify({
+          ...getState().page.lessonСalendar
+        })
+      }
+    );
+
     const data = await response.json();
     if (data.success) {
       return data;

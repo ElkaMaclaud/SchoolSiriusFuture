@@ -6,6 +6,8 @@ import Group from "../../UI_Component/Icons/Group";
 import { Dropdown } from "../../Components/DropDown/DropDown";
 import { OptionCard } from "../../UI_Component/OptionCard/OptionCard";
 import { setStyle } from "../../utils/setStyleDropdown";
+import { useAppDispatch } from "../../store/reduxHooks";
+import { UPDATE_LESSONS } from "../../store/slice";
 
 export const optionsSort = [
   "Ментальная арифметика",
@@ -19,10 +21,11 @@ const LessonCalendar = () => {
   const [showDropDown, toggleShowDropDown] = useToggle(false);
   const [select, setSelect] = useState("");
   const [changeSchedule, setChangeSchedule] = useState(false);
+  const dispatch = useAppDispatch();
 
   const saveChanges = () => {
     setChangeSchedule(!changeSchedule)
-    
+    dispatch(UPDATE_LESSONS())
   }
 
   const handleChange = (select: string) => {

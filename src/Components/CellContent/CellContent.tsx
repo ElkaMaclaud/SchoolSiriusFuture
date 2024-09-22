@@ -1,4 +1,10 @@
-import React, { FC, useState, CSSProperties, ChangeEvent, KeyboardEvent } from "react";
+import React, {
+  FC,
+  useState,
+  CSSProperties,
+  ChangeEvent,
+  KeyboardEvent,
+} from "react";
 import { ILesson, SET_CHANGE_LESSONS } from "../../store/slice";
 import classes from "./style/CellContent.module.css";
 import Pay from "../../UI_Component/Icons/Pay";
@@ -13,9 +19,9 @@ const CellContent: FC<{
 }> = ({ lesson, changeSchedule, style, edit }) => {
   const { lessonСalendar } = useAppSelector((state) => state.page);
   const [change, setChange] = useState(false);
-  const [valueTime, setValueTime] = useState(`${lesson.date.slice(11, 16)}`);
+  const [valueTime, setValueTime] = useState(lesson.date.slice(11, 16));
   const [valueTimeEnd, setValueTimeEnd] = useState(
-    `${getDurationLesson(lesson.date)}`
+    getDurationLesson(lesson.date)
   );
   const dispatch = useAppDispatch();
 
@@ -26,7 +32,7 @@ const CellContent: FC<{
         lesson.date.slice(0, 11) + e.target.value + lesson.date.slice(16)
       ) || valueTimeEnd;
     const value = durationTime === "Invalid Date" ? valueTimeEnd : durationTime;
-    setValueTimeEnd(`${value}`);
+    setValueTimeEnd(value);
   };
   const handleChangeTimeEnd = (e: ChangeEvent<HTMLInputElement>) => {
     setValueTimeEnd(e.target.value);
@@ -36,14 +42,14 @@ const CellContent: FC<{
         "-"
       ) || valueTimeEnd;
     const value = durationTime === "Invalid Date" ? valueTime : durationTime;
-    setValueTime(`${value}`);
+    setValueTime(value);
   };
   const changeLesson = () => {
     setChange(!change);
     const newLesson = {
       ...lesson,
       modified: true,
-      date: `${lesson.date.slice(0, 11)}${valueTime}${lesson.date.slice(16)}`,
+      date: lesson.date.slice(0, 11)+valueTime+lesson.date.slice(16),
     };
     dispatch(
       SET_CHANGE_LESSONS(
@@ -97,7 +103,7 @@ const CellContent: FC<{
       onClick={() => setChange(!change)}
     >
       <div className={classes.cardLessonDatePay}>
-        {`${lesson.date.slice(11, 16)} - ${getDurationLesson(lesson.date)}`}
+        {`${valueTime} - ${valueTimeEnd}`}
         {!lesson.paid && <Pay color={"#E12828"} />}
       </div>
       <div className={classes.cardLessonName}>{lesson.lessonName}</div>
