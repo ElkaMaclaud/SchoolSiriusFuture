@@ -346,7 +346,6 @@ const slice = createSlice({
     builder.addCase(FETCH_LESSONS_COUNTS.rejected, (state, action) => {
       return {
         ...state,
-        token: "",
         page: "LOGIN",
       };
     });
@@ -362,7 +361,6 @@ const slice = createSlice({
     builder.addCase(FETCH_LESSONS_NAME_AND_DATE.rejected, (state, action) => {
       return {
         ...state,
-        token: "",
         page: "LOGIN",
       };
     });

@@ -21,10 +21,10 @@ function App() {
       dispatch(FETCH_LESSONS_COUNTS());
       dispatch(FETCH_UPCOMING_LESSONS());
     } else if (page === "LOGIN") {
-      token ? navigate("/auth") : navigate("/registration");
+      token !== null ? navigate("/auth") : navigate("/registration");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]);
+  }, [page]);
   interface Elements {
     [key: string]: ReactElement;
   }
