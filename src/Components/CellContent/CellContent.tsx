@@ -10,6 +10,7 @@ import classes from "./style/CellContent.module.css";
 import Pay from "../../UI_Component/Icons/Pay";
 import { useAppDispatch, useAppSelector } from "../../store/reduxHooks";
 import { getDurationLesson } from "../../utils/getDurationLesson";
+import { checkingEnteredData } from "../../utils/checkingEnteredData";
 
 const CellContent: FC<{
   lesson: ILesson;
@@ -26,19 +27,21 @@ const CellContent: FC<{
   const dispatch = useAppDispatch();
 
   const handleChangeTime = (e: ChangeEvent<HTMLInputElement>) => {
-    setValueTime(e.target.value);
+    const userInput = checkingEnteredData(e.target.value)
+    setValueTime(userInput);
     const durationTime =
       getDurationLesson(
-        lesson.date.slice(0, 11) + e.target.value + lesson.date.slice(16)
+        lesson.date.slice(0, 11) + userInput + lesson.date.slice(16)
       ) || valueTimeEnd;
     const value = durationTime === "Invalid Date" ? valueTimeEnd : durationTime;
     setValueTimeEnd(value);
   };
   const handleChangeTimeEnd = (e: ChangeEvent<HTMLInputElement>) => {
-    setValueTimeEnd(e.target.value);
+    const userInput = checkingEnteredData(e.target.value)
+    setValueTimeEnd(userInput);
     const durationTime =
       getDurationLesson(
-        lesson.date.slice(0, 11) + e.target.value + lesson.date.slice(16),
+        lesson.date.slice(0, 11) + userInput + lesson.date.slice(16),
         "-"
       ) || valueTimeEnd;
     const value = durationTime === "Invalid Date" ? valueTime : durationTime;

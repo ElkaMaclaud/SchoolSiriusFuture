@@ -255,7 +255,7 @@ export const UPDATE_LESSONS = createAsyncThunk<
   try {
     const url = "https://scool-server.vercel.app/api/updateLessons";
     const option = {
-      method: "POST",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${getState().page.token}`,
@@ -263,9 +263,7 @@ export const UPDATE_LESSONS = createAsyncThunk<
       body: JSON.stringify(getState().page.lessonСalendar),
     };
 
-    const data = await fetchDataWithRetry<
-      RequestData
-    >(url, option);
+    const data = await fetchDataWithRetry<RequestData>(url, option);
     if (data.success) {
       return data;
     } else {
@@ -281,14 +279,14 @@ export const FETCH_USERS = createAsyncThunk<
   { rejectValue: string; state: RootState }
 >("page/FETCH_USERS", async (_, { rejectWithValue, getState }) => {
   try {
-    const url = "https://scool-server.vercel.app/api/getUsers"
+    const url = "https://scool-server.vercel.app/api/getUsers";
     const option = {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getState().page.token}`,
-        },
-      }
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getState().page.token}`,
+      },
+    };
     const data = await fetchDataWithRetry<
       RequestData & { data: IAuthorization[] }
     >(url, option);
@@ -313,7 +311,10 @@ const slice = createSlice({
       state.loading = action.payload;
     },
     SET_CHANGE_LESSONS: (state, action) => {
-      state.lessonСalendar = action.payload;
+      state.lessonСalendar = action.payload.sort(
+        (a: ILesson, b: ILesson) =>
+          new Date(a.date).getTime() - new Date(b.date).getTime()
+      );
     },
     SET_MEET_THE_USER: (state, action) => {
       state.meetTheUser = action.payload;
@@ -394,7 +395,10 @@ const slice = createSlice({
       return {
         ...state,
         loading: false,
-        lessonСalendar: action.payload.data,
+        lessonСalendar: action.payload.data.sort(
+          (a: ILesson, b: ILesson) =>
+            new Date(a.date).getTime() - new Date(b.date).getTime()
+        ),
         success: true,
         page: "COMPLICATED",
       };
