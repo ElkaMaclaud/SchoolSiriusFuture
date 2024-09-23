@@ -17,12 +17,16 @@ function App() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   useEffect(() => {
-    if (page === "LOADING") {
-      dispatch(FETCH_LESSONS_COUNTS());
-      dispatch(FETCH_UPCOMING_LESSONS());
-    } else if (page === "LOGIN") {
-      token !== null ? navigate("/auth") : navigate("/registration");
-    }
+    const action = async () => {
+      if (page === "LOADING") {
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        dispatch(FETCH_LESSONS_COUNTS());
+        dispatch(FETCH_UPCOMING_LESSONS());
+      } else if (page === "LOGIN") {
+        token !== null ? navigate("/auth") : navigate("/registration");
+      }
+    };
+    action()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
   interface Elements {
