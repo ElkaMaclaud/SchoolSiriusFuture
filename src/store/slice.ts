@@ -6,6 +6,10 @@ type IAuthorization = {
   email: string;
   password: string;
 };
+type RequestData = {
+  success: boolean;
+  message: string;
+};
 export interface ICountLessons {
   [key: string]: number;
 }
@@ -57,28 +61,62 @@ const state: IInitialState = {
   users: [],
   meetTheUser: true,
 };
+async function fetchDataWithRetry<T>(
+  url: string,
+  options: RequestInit,
+  responseType: "json" | "blob" | "text" | "document" = "json"
+) {
+  let retries = 0;
+  while (retries < 3) {
+    try {
+      const response = await Promise.race([
+        fetch(url, options),
+        new Promise<Response>((_, reject) =>
+          setTimeout(() => reject(new Error("Превышено время ожидания")), 3000)
+        ),
+      ]);
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Что пошло не так");
+      }
+      if (responseType !== "json") {
+        return response as T;
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      retries++;
+      if (retries === 3) {
+        const errorMessage = (error as Error).message || "Что-то пошло не так!";
+        throw new Error(`Ошибка после ${retries} попыток: ${errorMessage}`);
+      }
+    }
+  }
+
+  throw new Error("Не удалось получить ответ от сервера после всех попыток :(");
+}
 export const REGISTR_USER = createAsyncThunk<
-  { success: boolean; message: string },
+  RequestData,
   IAuthorization,
   {
     rejectValue: string;
   }
 >("page/REGISTR_USER", async ({ email, password }, { rejectWithValue }) => {
   try {
-    const response = await fetch(
-      "https://scool-server.vercel.app/api/registration",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      }
-    );
-    const data = await response.json();
+    const url = "https://scool-server.vercel.app/api/registration";
+    const option = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    };
+
+    const data = await fetchDataWithRetry<RequestData>(url, option);
     if (data.success) {
       return data;
     } else {
@@ -89,14 +127,15 @@ export const REGISTR_USER = createAsyncThunk<
   }
 });
 export const AUTH_USER = createAsyncThunk<
-  { success: boolean; message: string; token: string },
+  RequestData & { token: string },
   IAuthorization,
   {
     rejectValue: string;
   }
 >("page/AUTH_USER", async ({ email, password }, { rejectWithValue }) => {
   try {
-    const response = await fetch("https://scool-server.vercel.app/api/login", {
+    const url = "https://scool-server.vercel.app/api/login";
+    const option = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -105,8 +144,11 @@ export const AUTH_USER = createAsyncThunk<
         email,
         password,
       }),
-    });
-    const data = await response.json();
+    };
+    const data = await fetchDataWithRetry<RequestData & { token: string }>(
+      url,
+      option
+    );
     if (data.token) {
       return data;
     } else {
@@ -117,7 +159,7 @@ export const AUTH_USER = createAsyncThunk<
   }
 });
 export const FETCH_LESSONS_NAME_AND_DATE = createAsyncThunk<
-  { success: boolean; message: string; data: ILesson[] },
+  RequestData & { data: ILesson[] },
   { name: string; startDate: string; endDate: string },
   { rejectValue: string; state: RootState }
 >(
@@ -125,23 +167,20 @@ export const FETCH_LESSONS_NAME_AND_DATE = createAsyncThunk<
   async (dto, { rejectWithValue, getState }) => {
     const { name, startDate, endDate } = dto;
     try {
-      const response = await fetch(
-        "https://scool-server.vercel.app/api/lessonsByDate",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${getState().page.token}`,
-          },
-          body: JSON.stringify({ name, startDate, endDate }),
-        }
+      const url = "https://scool-server.vercel.app/api/lessonsByDate";
+      const option = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getState().page.token}`,
+        },
+        body: JSON.stringify({ name, startDate, endDate }),
+      };
+
+      const data = await fetchDataWithRetry<RequestData & { data: ILesson[] }>(
+        url,
+        option
       );
-
-      if (!response.ok) {
-        throw new Error("Ошибка при получении данных");
-      }
-
-      const data = await response.json();
 
       if (data.success) {
         return data;
@@ -155,23 +194,24 @@ export const FETCH_LESSONS_NAME_AND_DATE = createAsyncThunk<
 );
 
 export const FETCH_UPCOMING_LESSONS = createAsyncThunk<
-  { success: boolean; message: string; data: IData },
+  RequestData & { data: IData },
   undefined,
   { rejectValue: string; state: RootState }
 >("page/FETCH_UPCOMING_LESSONS", async (_, { rejectWithValue, getState }) => {
   try {
-    const response = await fetch(
-      "https://scool-server.vercel.app/api/upcomingLessons",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getState().page.token}`,
-        },
-      }
-    );
+    const url = "https://scool-server.vercel.app/api/upcomingLessons";
+    const option = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getState().page.token}`,
+      },
+    };
 
-    const data = await response.json();
+    const data = await fetchDataWithRetry<RequestData & { data: IData }>(
+      url,
+      option
+    );
     if (data.success) {
       return data;
     } else {
@@ -182,22 +222,22 @@ export const FETCH_UPCOMING_LESSONS = createAsyncThunk<
   }
 });
 export const FETCH_LESSONS_COUNTS = createAsyncThunk<
-  { success: boolean; message: string; data: ICountLessons },
+  RequestData & { data: ICountLessons },
   undefined,
   { rejectValue: string; state: RootState }
 >("page/FETCH_LESSONS_COUNTS", async (_, { rejectWithValue, getState }) => {
   try {
-    const response = await fetch(
-      "https://scool-server.vercel.app/api/lessonCounts",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getState().page.token}`,
-        },
-      }
-    );
-    const data = await response.json();
+    const url = "https://scool-server.vercel.app/api/lessonCounts";
+    const option = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getState().page.token}`,
+      },
+    };
+    const data = await fetchDataWithRetry<
+      RequestData & { data: ICountLessons }
+    >(url, option);
     if (data.success) {
       return data;
     } else {
@@ -208,23 +248,25 @@ export const FETCH_LESSONS_COUNTS = createAsyncThunk<
   }
 });
 export const UPDATE_LESSONS = createAsyncThunk<
-  { success: boolean; message: string; data: IAuthorization[] },
+  RequestData,
   undefined,
   { rejectValue: string; state: RootState }
 >("page/UPDATE_LESSONS", async (_, { rejectWithValue, getState }) => {
   try {
-    const response = await fetch("https://scool-server.vercel.app/api/updateLessons", {
+    const url = "https://scool-server.vercel.app/api/updateLessons";
+    const option = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${getState().page.token}`,
       },
       body: JSON.stringify(getState().page.lessonСalendar),
-    });
+    };
 
-    const data = await response.json();
+    const data = await fetchDataWithRetry<
+      RequestData
+    >(url, option);
     if (data.success) {
-      
       return data;
     } else {
       throw new Error(data.message);
@@ -234,23 +276,22 @@ export const UPDATE_LESSONS = createAsyncThunk<
   }
 });
 export const FETCH_USERS = createAsyncThunk<
-  { success: boolean; message: string; data: IAuthorization[] },
+  RequestData & { data: IAuthorization[] },
   undefined,
   { rejectValue: string; state: RootState }
 >("page/FETCH_USERS", async (_, { rejectWithValue, getState }) => {
   try {
-    const response = await fetch(
-      "https://scool-server.vercel.app/api/getUsers",
-      {
+    const url = "https://scool-server.vercel.app/api/getUsers"
+    const option = {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${getState().page.token}`,
         },
       }
-    );
-
-    const data = await response.json();
+    const data = await fetchDataWithRetry<
+      RequestData & { data: IAuthorization[] }
+    >(url, option);
     if (data.success) {
       return data;
     } else {
