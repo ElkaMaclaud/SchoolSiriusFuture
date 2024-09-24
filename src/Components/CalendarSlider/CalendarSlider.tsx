@@ -135,7 +135,7 @@ const CalendarSlider: FC<ISelectProps> = ({ select, changeSchedule }) => {
           return (
             lessonDate.getFullYear() === currentDate.getFullYear() &&
             lessonDate.getMonth() === currentDate.getMonth() &&
-            lessonDate.getDate() === currentDate.getDate()
+            lessonDate.getUTCDate() === currentDate.getDate()
           );
         });
 

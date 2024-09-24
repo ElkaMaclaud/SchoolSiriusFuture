@@ -25,7 +25,7 @@ export const createCalendar = (
     `${getPeriodDate(
       endDate.getFullYear(),
       endDate.getMonth() + 1,
-      endDate.getDate()
+      42 - daysInMonth + firstDate
     )}`,
   ];
 };
