@@ -19,7 +19,7 @@ const LessonCalendar = () => {
   const ref = useRef<HTMLDivElement>(null);
   const refParent = useRef<HTMLDivElement>(null);
   const [showDropDown, toggleShowDropDown] = useToggle(false);
-  const [select, setSelect] = useState("");
+  const [select, setSelect] = useState(optionsSort[0]);
   const [changeSchedule, setChangeSchedule] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -33,13 +33,12 @@ const LessonCalendar = () => {
     toggleShowDropDown();
   };
   return (
-    <div className={classes.lessonCalendarWrapper}>
+    <div className={classes.lessonCalendarWrapper} onClick={toggleShowDropDown}>
       <div>
         <div className={classes.lessonCalendarSelect}>
           <div
             className={classes.select}
             ref={refParent}
-            onClick={toggleShowDropDown}
           >
             <input
               readOnly={true}
