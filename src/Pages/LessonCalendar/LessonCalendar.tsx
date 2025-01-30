@@ -1,13 +1,13 @@
-import React, { useRef, useState } from "react";
+import React, { MouseEvent, useRef, useState } from "react";
 import CalendarSlider from "../../Components/CalendarSlider/CalendarSlider";
 import classes from "./style/LessonsCalendar.module.css";
-import { useToggle } from "../../hooks/useToggle";
 import Group from "../../UI_Component/Icons/Group";
 import { Dropdown } from "../../Components/DropDown/DropDown";
 import { OptionCard } from "../../UI_Component/OptionCard/OptionCard";
 import { setStyle } from "../../utils/setStyleDropdown";
 import { useAppDispatch } from "../../store/reduxHooks";
 import { UPDATE_LESSONS } from "../../store/slice";
+import { useToggle } from "../../hooks/useToggle";
 
 export const optionsSort = [
   "Ментальная арифметика",
@@ -27,18 +27,22 @@ const LessonCalendar = () => {
     setChangeSchedule(!changeSchedule)
     changeSchedule && dispatch(UPDATE_LESSONS())
   }
-
   const handleChange = (select: string) => {
     setSelect(select);
     toggleShowDropDown();
   };
+  const switchDropDown = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    toggleShowDropDown()
+  }
   return (
-    <div className={classes.lessonCalendarWrapper} onClick={toggleShowDropDown}>
+    <div className={classes.lessonCalendarWrapper}>
       <div>
         <div className={classes.lessonCalendarSelect}>
           <div
             className={classes.select}
             ref={refParent}
+            onMouseDown={switchDropDown}
           >
             <input
               readOnly={true}
@@ -71,6 +75,7 @@ const LessonCalendar = () => {
               }
               style={setStyle(refParent)}
               notPseudoElement
+              onClickOutside={toggleShowDropDown}
             />
           )}
         </div>

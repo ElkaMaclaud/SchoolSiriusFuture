@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useEffect, useRef, useState } from "react";
+import React, { FC, Fragment, MouseEvent, useEffect, useRef, useState } from "react";
 import { Arrow } from "../../UI_Component/Icons/Arrow";
 import classes from "./style/CalendarSlider.module.css";
 import Questions from "../../UI_Component/Icons/Questions";
@@ -44,6 +44,11 @@ const CalendarSlider: FC<ISelectProps> = ({ select, changeSchedule }) => {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentMonth, select]);
 
+  const switchDropDown = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    toggleShowDropDown()
+  }
+
   const goToToday = () => {
     setCurrentYear(new Date().getFullYear());
     setCurrentMonth(new Date().getMonth() + 1);
@@ -83,9 +88,8 @@ const CalendarSlider: FC<ISelectProps> = ({ select, changeSchedule }) => {
             if (lessonDate.getMonth() === currentMonth - 2) {
               return {
                 backgroundColor: "transparent",
-                border: `${
-                  lesson.wasAbsent ? "1px solid #79747F" : "1px solid #22782B"
-                }`,
+                border: `${lesson.wasAbsent ? "1px solid #79747F" : "1px solid #22782B"
+                  }`,
                 textDecoration: `${lesson.wasAbsent ? "line-through" : "none"}`,
                 cursor: changeSchedule ? "pointer" : "auto",
               };
@@ -205,7 +209,7 @@ const CalendarSlider: FC<ISelectProps> = ({ select, changeSchedule }) => {
         </div>
         <div className={classes.wrapperCalendarButtonToday}>
           <button onClick={goToToday}>Сегодня</button>
-          <div onClick={toggleShowDropDown}>
+          <div onMouseDown={switchDropDown}>
             <Questions color={"#7362BC"} />
           </div>
           {showDropDown && (
@@ -224,6 +228,7 @@ const CalendarSlider: FC<ISelectProps> = ({ select, changeSchedule }) => {
                 </div>
               }
               notPseudoElement
+              onClickOutside={toggleShowDropDown}
             />
           )}
         </div>
