@@ -11,6 +11,7 @@ import Pay from "../../UI_Component/Icons/Pay";
 import { useAppDispatch, useAppSelector } from "../../store/reduxHooks";
 import { getDurationLesson } from "../../utils/getDurationLesson";
 import { checkingEnteredData } from "../../utils/checkingEnteredData";
+import { dateValidate } from "../../utils/dateValidete";
 
 const CellContent: FC<{
   lesson: ILesson;
@@ -49,10 +50,25 @@ const CellContent: FC<{
   };
   const changeLesson = () => {
     setChange(!change);
+    let val;
+    if (valueTime.length < 5) {
+      val = dateValidate(valueTime)
+      setValueTime(val)
+    } else if (valueTimeEnd.length < 5) {
+      val = dateValidate(valueTimeEnd)
+      setValueTimeEnd(val)
+      const durationTime =
+        getDurationLesson(
+          lesson.date.slice(0, 11) + val + lesson.date.slice(16),
+          "-"
+        ) || valueTimeEnd;
+      val = durationTime === "Invalid Date" ? valueTime : durationTime;
+      setValueTime(val);
+    }
     const newLesson = {
       ...lesson,
       modified: true,
-      date: lesson.date.slice(0, 11)+valueTime+lesson.date.slice(16),
+      date: lesson.date.slice(0, 11) + val + lesson.date.slice(16),
     };
     dispatch(
       SET_CHANGE_LESSONS(
